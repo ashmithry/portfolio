@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TODO: Change this to your name -->
+    <title>Your Name - Personal Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 antialiased">
+
+    <!-- Header / Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <!-- TODO: Change this to your name or initials -->
+                    <span class="text-2xl font-bold text-indigo-600">Your Name</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#about" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#projects" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                    <a href="#contact" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Hero / About Section -->
+        <section id="about" class="bg-white shadow-lg rounded-2xl overflow-hidden p-8 sm:p-12 mb-12">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- TODO: Find a simple, professional-looking photo of yourself, host it online (e.g., on Imgur), and paste the link here. -->
+                <!-- A good placeholder: https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo -->
+                <img class="h-40 w-40 rounded-full object-cover shadow-md mb-6 md:mb-0 md:mr-8 flex-shrink-0" 
+                     src="https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo" 
+                     alt="A professional photo of yourself"
+                     onerror="this.src='https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo'">
+                
+                <div>
+                    <!-- TODO: Change this to your name -->
+                    <h1 class="text-4xl font-bold text-gray-900 mb-2">Hi, I'm Your Name</h1>
+                    
+                    <!-- TODO: Write 1-2 paragraphs about yourself. What are you passionate about? What are your goals? What are you studying? -->
+                    <p class="text-lg text-gray-700 mb-4">
+                        I'm a passionate and motivated high school student with a deep interest in [Your Interest, e.g., computer science, biotechnology, visual arts]. I love solving complex problems and building tangible projects that can make a difference.
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        I'm currently seeking to bring my skills in [Skill 1] and [Skill 2] to a challenging and collaborative university environment. I'm eager to contribute to meaningful research and grow as both a leader and an innovator.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">My Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- TODO: Project 1 -->
+                <!-- Duplicate this 'project-card' block for each project you want to showcase. 3-4 good projects is ideal. -->
+                <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
+                    <!-- TODO: Add a link to an image for your project. -->
+                    <!-- Placeholder: https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot -->
+                    <img src="https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot" alt="Screenshot of Project 1" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot'">
+                    <div class="p-6">
+                        <!-- TODO: Add your project's title -->
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Project Title 1</h3>
+                        <!-- TODO: Add a 1-2 sentence description of your project. What problem does it solve? What tech did you use? -->
+                        <p class="text-gray-700 mb-4">
+                            A brief description of your project. For example: "A web application built with Python and Flask that helps students track their homework and study habits."
+                        </p>
+                        <!-- TODO: Add the link to your project (e.g., GitHub repo, live demo, or a Google Doc with more info) -->
+                        <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition-colors">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+                <!-- End Project 1 Card -->
+
+                <!-- TODO: Project 2 -->
+                <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
+                    <!-- TODO: Add a link to an image for your project. -->
+                    <!-- Placeholder: https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot -->
+                    <img src="https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot" alt="Screenshot of Project 2" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot'">
+                    <div class="p-6">
+                        <!-- TODO: Add your project's title -->
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Project Title 2</h3>
+                        <!-- TODO: Add a 1-2 sentence description of your project. -->
+                        <p class="text-gray-700 mb-4">
+                            A description of your second project. For example: "An award-winning science fair project that analyzed local water quality, presented with a data visualization dashboard."
+                        </p>
+                        <!-- TODO: Add the link to your project -->
+                        <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition-colors">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+                <!-- End Project 2 Card -->
+
+                <!-- Add more project cards here if needed -->
+
+            </div>
+        </section>
+
+        <!-- Contact / Links Section -->
+        <section id="contact" class="mt-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+            <p class="text-lg text-gray-700 mb-8">
+                I'm always open to new opportunities and collaborations.
+            </p>
+            <div class="flex justify-center space-x-6">
+                
+                <!-- TODO: Add your email address -->
+                <a href="mailto:your.email@example.com" class="inline-block bg-white text-gray-700 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    Email Me
+                </a>
+                
+                <!-- TODO: Add a link to your LinkedIn profile -->
+                <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
+                    View LinkedIn
+                </a>
+                
+                <!-- TODO: (Optional) Add a link to your PDF resume (you can host it on Google Drive) -->
+                <a href="#" class="inline-block bg-white text-gray-700 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    View Resume (PDF)
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-16 border-t border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500 text-sm">
+            <!-- TODO: Change "Your Name" -->
+            &copy; 2025 Your Name. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
