@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TODO: Your Name -->
     <title>Ashmith Yaramada - Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Support for dark mode and icons -->
+    <!-- New color scheme: Deep Navy (slate) with Indigo accent -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -20,13 +19,16 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        gray: {
-                            900: '#121212',
-                            800: '#1E1E1E',
-                            700: '#2A2A2A',
-                            600: '#3A3A3A',
-                            200: '#E5E7EB',
-                            100: '#F3F4F6',
+                        slate: {
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617'
+                        },
+                        indigo: {
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5'
                         }
                     }
                 }
@@ -38,20 +40,21 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .project-card, .exp-card, .research-card {
-            background-color: #1E1E1E; /* gray-800 */
-            border: 1px solid #3A3A3A; /* gray-600 */
+        /* Updated card styles for the new theme */
+        .project-card, .exp-card, .research-card, .initiative-card {
+            background-color: #1e293b; /* slate-800 */
+            border: 1px solid #334155; /* slate-700 */
             transition: all 0.3s ease;
         }
-        .project-card:hover, .exp-card:hover, .research-card:hover {
-            border-color: #4F46E5; /* indigo-600 */
+        .project-card:hover, .exp-card:hover, .research-card:hover, .initiative-card:hover {
+            border-color: #818cf8; /* indigo-400 */
         }
         .project-card:hover {
              transform: translateY(-4px);
         }
         .tag {
-            background-color: #374151; /* gray-700 */
-            color: #D1D5DB; /* gray-300 */
+            background-color: #334155; /* slate-700 */
+            color: #e2e8f0; /* slate-200 */
         }
         /* Responsive video embed */
         .video-container {
@@ -73,37 +76,40 @@
     </style>
 </head>
 
-<body class="dark bg-gray-900 text-gray-200 font-sans">
+<body class="dark bg-slate-950 text-slate-200 font-sans">
 
     <!-- Header / Navigation -->
-    <header class="bg-gray-900 sticky top-0 z-50 border-b border-gray-700">
+    <header class="bg-slate-950 sticky top-0 z-50 border-b border-slate-700">
         <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="#" onclick="showPage('page-home'); return false;" class="text-2xl font-bold text-white">Ashmith Yaramada</a>
+                    <!-- New AY Logo -->
+                    <a href="#about" class="flex items-center justify-center w-10 h-10 bg-indigo-500 rounded-full text-white text-xl font-bold">
+                        AY
+                    </a>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="flex items-center md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white p-2 rounded-md">
+                    <button id="mobile-menu-button" class="text-slate-300 hover:text-white p-2 rounded-md">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                     </button>
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="#about" onclick="showPage('page-home', 'about'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-                    <a href="#initiatives" onclick="showPage('page-home', 'initiatives'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Initiatives</a>
-                    <a href="#projects" onclick="showPage('page-home', 'projects'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-                    <a href="#experience" onclick="showPage('page-home', 'experience'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Experience</a>
-                    <a href="#research" onclick="showPage('page-home', 'research'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Research</a>
+                    <a href="#about" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#initiatives" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Initiatives</a>
+                    <a href="#projects" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                    <a href="#experience" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                    <a href="#research" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Research</a>
                 </div>
             </div>
             <!-- Mobile Menu, hidden by default -->
-            <div id="mobile-menu" class="hidden md:hidden">
-                <a href="#about" onclick="showPage('page-home', 'about'); closeMenu(); return false;" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="#initiatives" onclick="showPage('page-home', 'initiatives'); closeMenu(); return false;" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Initiatives</a>
-                <a href="#projects" onclick="showPage('page-home', 'projects'); closeMenu(); return false;" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                <a href="#experience" onclick="showPage('page-home', 'experience'); closeMenu(); return false;" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Experience</a>
-                <a href="#research" onclick="showPage('page-home', 'research'); closeMenu(); return false;" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Research</a>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#about" class="block text-slate-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#initiatives" class="block text-slate-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Initiatives</a>
+                <a href="#projects" class="block text-slate-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#experience" class="block text-slate-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#research" class="block text-slate-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Research</a>
             </div>
         </nav>
     </header>
@@ -111,21 +117,26 @@
     <!-- Main Content Area -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <!-- =================================================================== -->
-        <!--                            HOME PAGE                                -->
-        <!-- =================================================================== -->
-        <section id="page-home" class="space-y-24">
+        <!-- All content is now on one page -->
+        <div id="page-home" class="space-y-24">
 
-            <!-- About Section -->
+            <!-- About Section with Image -->
             <section id="about" class="min-h-[70vh] flex items-center">
-                <div>
-                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">Hey, I'm Ashmith!</h1>
-                    <p class="text-xl text-gray-300 max-w-3xl mb-8">
-                        A highly motivated and organized student with a proven background in advanced computer science, mathematics, and entrepreneurship. Passionate about leveraging technology to create accessible, impactful educational tools and solutions.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#projects" onclick="showPage('page-home', 'projects'); return false;" class="text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-md text-lg font-medium">View Projects</a>
-                        <a href="#experience" onclick="showPage('page-home', 'experience'); return false;" class="text-gray-300 bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-md text-lg font-medium">View Experience</a>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2">
+                        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">Hey, I'm Ashmith!</h1>
+                        <p class="text-xl text-slate-300 max-w-2xl mb-8">
+                            A motivated and organized student with a proven background in advanced computer science, mathematics, and entrepreneurship. Passionate about leveraging technology to create accessible, impactful educational tools and solutions.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#projects" class="text-white bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-md text-lg font-medium text-center">View Projects</a>
+                            <a href="#initiatives" class="text-slate-300 bg-slate-700 hover:bg-slate-600 px-6 py-3 rounded-md text-lg font-medium text-center">View Initiatives</a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-1 flex justify-center">
+                        <img src="https://i.imgur.com/YOUR_IMAGE_URL.jpg" <!-- TODO: Replace with your image URL -->
+                             alt="A photo of Ashmith Yaramada"
+                             class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-slate-700 shadow-lg">
                     </div>
                 </div>
             </section>
@@ -133,7 +144,7 @@
             <!-- Showcase Section -->
             <section id="showcase">
                 <h2 class="text-4xl font-bold text-white mb-8 text-center">2-Minute Showcase</h2>
-                <p class="text-lg text-gray-400 mb-8 text-center max-w-2xl mx-auto">Here's me in a little under 120 seconds!</p>
+                <p class="text-lg text-slate-400 mb-8 text-center max-w-2xl mx-auto">Here's a quick video walkthrough of my work, my process, and what I'm passionate about.</p>
                 <div class="video-container shadow-lg">
                     <!-- TODO: Replace this with your YouTube video's embed URL -->
                     <iframe 
@@ -149,153 +160,186 @@
             <!-- Initiatives Section -->
             <section id="initiatives">
                 <h2 class="text-4xl font-bold text-white mb-8">Initiatives</h2>
-                <p class="text-lg text-gray-400 mb-8">Leading organizations to make a tangible impact in education and technology.</p>
-                <!-- This layout uses flexbox to create spacious, side-by-side (on desktop) sections -->
-                <div class="space-y-16">
+                <p class="text-lg text-slate-400 mb-12">Leading organizations to make a tangible impact in education and technology.</p>
+                <div class="space-y-20">
                     
                     <!-- Initiative 1: DECA -->
-                    <div class="flex flex-col md:flex-row items-center gap-8">
-                        <div class="md:w-2/3">
-                            <h3 class="text-3xl font-semibold text-white mb-3">DECA Chapter President</h3>
-                            <p class="text-gray-300 text-lg mb-4">Led Virginia's 2nd largest DECA chapter (500+ members). Spearheaded 300% membership growth. Managed 10+ officers and a 5-member tech team building internal automation tools.</p>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">Leadership</span>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">Management</span>
-                        </div>
-                        <div class="md:w-1/3 text-center">
-                            <!-- TODO: Add your impact numbers here -->
-                            <h4 class="text-6xl font-bold text-indigo-400">300%</h4>
-                            <p class="text-gray-400 text-lg">Membership Growth</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_3271-A85M0ORevgUD81zD.jpeg" alt="Ashmith at a DECA event" class="rounded-lg shadow-lg object-cover w-full h-80">
+                        <div>
+                            <h3 class="text-3xl font-semibold text-white mb-3">John Champe DECA</h3>
+                            <p class="text-slate-300 text-lg mb-6">As Chapter President, I spearheaded 289% membership growth, making us the 2nd largest chapter in Virginia. I manage a team of 10+ officers, lead community service initiatives, and am currently developing "FORGE," a platform to automate operations for our 198:1 student-to-advisor ratio.</p>
+                            <div class="flex flex-wrap gap-4 mb-6">
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">289%</h4>
+                                    <p class="text-slate-400 text-sm">Membership Growth</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">530+</h4>
+                                    <p class="text-slate-400 text-sm">Total Members</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">#2</h4>
+                                    <p class="text-slate-400 text-sm">in State Membership</p>
+                                </div>
+                            </div>
+                            <a href="https://www.instagram.com/champedeca" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium text-lg">
+                                View Instagram &rarr;
+                            </a>
                         </div>
                     </div>
 
                     <!-- Initiative 2: Mini Makers -->
-                    <div class="flex flex-col md:flex-row-reverse items-center gap-8">
-                        <div class="md:w-2/3">
-                            <h3 class="text-3xl font-semibold text-white mb-3">Mini Makers</h3>
-                            <p class="text-gray-300 text-lg mb-4">Co-Founder & Co-CEO of an educational initiative. Taught 400+ students, developed an affordable curriculum (<\$20/hr), and contributed to local, national, and international charitable causes.</p>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">EdTech</span>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">Entrepreneurship</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div class="md:order-2">
+                            <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg" alt="Ashmith teaching students at Mini Makers" class="rounded-lg shadow-lg object-cover w-full h-80">
                         </div>
-                        <div class="md:w-1/3 text-center">
-                            <!-- TODO: Add your impact numbers here -->
-                            <h4 class="text-6xl font-bold text-indigo-400">400+</h4>
-                            <p class="text-gray-400 text-lg">Students Taught</p>
+                        <div class="md:order-1">
+                            <h3 class="text-3xl font-semibold text-white mb-3">Mini Makers</h3>
+                            <p class="text-slate-300 text-lg mb-6">As Co-Founder & Co-CEO of this $8k+ revenue initiative, I developed an affordable (<\$20/hr) curriculum to make tech education accessible. We've taught 400+ students 8+ languages, hosted bootcamps for 350+, and donated over $2k to charity, including funding 600+ eye care treatments via the Sudeekshan Service Recognition Award.</p>
+                            <div class="flex flex-wrap gap-4 mb-6">
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">400+</h4>
+                                    <p class="text-slate-400 text-sm">Students Taught</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">35k+</h4>
+                                    <p class="text-slate-400 text-sm">Online Media Views</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">600+</h4>
+                                    <p class="text-slate-400 text-sm">Patients Cared For</p>
+                                </div>
+                            </div>
+                            <a href="https://minimakers.site" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium text-lg">
+                                Visit Website &rarr;
+                            </a>
                         </div>
                     </div>
 
                     <!-- Initiative 3: Cognicade Studios -->
-                    <div class="flex flex-col md:flex-row items-center gap-8">
-                        <div class="md:w-2/3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg" alt="Ashmith presenting Cognicade Studios projects" class="rounded-lg shadow-lg object-cover w-full h-80">
+                        <div>
                             <h3 class="text-3xl font-semibold text-white mb-3">Cognicade Studios</h3>
-                            <p class="text-gray-300 text-lg mb-4">Co-Founder & Creative Director. Developed educational games with 10k+ total plays. Won prizes and development funding. Working on proposing game dev curriculum to LCPS.</p>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">Game Dev</span>
-                            <span class="tag text-sm font-medium px-3 py-1 rounded-full">EdTech</span>
-                        </div>
-                        <div class="md:w-1/3 text-center">
-                            <!-- TODO: Add your impact numbers here -->
-                            <h4 class="text-6xl font-bold text-indigo-400">10,000+</h4>
-                            <p class="text-gray-400 text-lg">Total Game Plays</p>
+                            <p class="text-slate-300 text-lg mb-6">As Co-Founder and Lead Developer, I create "serious games" to bridge the engagement gap in education. We've developed 5+ games, won $1500+ in hackathons, and presented our work to over 90 students in-person, garnering positive feedback from students and teachers alike.</p>
+                            <div class="flex flex-wrap gap-4 mb-6">
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">10,000+</h4>
+                                    <p class="text-slate-400 text-sm">Total Game Plays</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">90+</h4>
+                                    <p class="text-slate-400 text-sm">Students Taught</p>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-4xl font-bold text-indigo-400">$1.5k+</h4>
+                                    <p class="text-slate-400 text-sm">in Prizes Won</p>
+                                </div>
+                            </div>
+                            <a href="https://cognicade.org" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium text-lg">
+                                Visit Website &rarr;
+                            </a>
                         </div>
                     </div>
-
                 </div>
             </section>
 
             <!-- Projects Section -->
             <section id="projects">
                 <h2 class="text-4xl font-bold text-white mb-8">Projects</h2>
-                <p class="text-lg text-gray-400 mb-8">Hands-on applications of my skills in software development, AI, and game design.</p>
+                <p class="text-lg text-slate-400 mb-8">Hands-on applications of my skills in software development, AI, and game design.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     <!-- Project Card: DECA Forge -->
-                    <a href="#" onclick="showPage('page-project-deca-forge'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/57DrV8u.png" alt="Screenshot of DECA Forge project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">DECA Forge</h3>
-                            <p class="text-gray-400 text-sm mb-4">A comprehensive management platform to automate operations for a 200:1 student-to-staff ratio.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">DECA Forge</h3>
+                            <p class="text-slate-400 text-sm mb-4">A comprehensive management platform to automate operations for my 530-member DECA chapter. It's built to handle event registration, track member participation, and streamline communication, solving our 198:1 student-to-advisor bottleneck.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Web Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: The FACTory -->
-                    <a href="#" onclick="showPage('page-project-factory'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/UXuNm2e.png" alt="Screenshot of The FACTory project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">The FACTory</h3>
-                            <p class="text-gray-400 text-sm mb-4">An educational game on media literacy developed at the Virginia Serious Games Institute (ASSIP).</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">The FACTory</h3>
+                            <p class="text-slate-400 text-sm mb-4">An educational game on media literacy co-developed during my internship at the Virginia Serious Games Institute. The game teaches students to identify misinformation and is currently deployed in local elementary schools. Our abstract was published and presented at two university symposia.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: EcoSpark -->
-                    <a href="#" onclick="showPage('page-project-ecospark'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/oAkEo30.png" alt="Screenshot of EcoSpark project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">EcoSpark</h3>
-                            <p class="text-gray-400 text-sm mb-4">A serious game that teaches players the importance of budgeting and environmental sustainability.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">EcoSpark</h3>
+                            <p class="text-slate-400 text-sm mb-4">A "serious game" from Cognicade Studios that teaches financial literacy and environmental sustainability. Players must manage a budget while making eco-conscious choices, learning about their interconnectedness in a closed-feedback loop.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: The Rookie -->
-                    <a href="#" onclick="showPage('page-project-rookie'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/meXg7fG.png" alt="Screenshot of The Rookie project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">The Rookie</h3>
-                            <p class="text-gray-400 text-sm mb-4">A first-person spy platformer with grappling, hacking, and a simulation plot twist.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">The Rookie</h3>
+                            <p class="text-slate-400 text-sm mb-4">A first-person spy platformer inspired by Karlson and Portal. Players use grappling, hacking, and energy blasting mechanics, only to discover the entire game is a simulation test they must escape. This project was a deep dive into complex physics and narrative design.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: Grading Hat -->
-                    <a href="#" onclick="showPage('page-project-grading-hat'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/Or5lDHs.png" alt="Screenshot of Grading Hat project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Grading Hat</h3>
-                            <p class="text-gray-400 text-sm mb-4">An intelligent grading system that uses AI to assist educators in evaluating student work efficiently.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">Grading Hat</h3>
+                            <p class="text-slate-400 text-sm mb-4">An intelligent grading system that uses AI to assist educators. It provides consistent evaluation standards, integrates into existing workflows, and offers automated feedback generation to save teachers time and reduce bias.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">AI/ML</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: Christmas Chaos -->
-                    <a href="#" onclick="showPage('page-project-christmas-chaos'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/E2O37vK.png" alt="Screenshot of Christmas Chaos project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Christmas Chaos</h3>
-                            <p class="text-gray-400 text-sm mb-4">A game where you play as Santa protecting the golden present from a horde of blobs.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">Christmas Chaos</h3>
+                            <p class="text-slate-400 text-sm mb-4">A fast-paced, top-down arcade shooter where you play as Santa Claus. Players must protect the Golden Present from an incoming horde of enemies using a bow, arrow, and sword, testing their reflexes in a survival format.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: Moneytree Simulator -->
-                    <a href="#" onclick="showPage('page-project-moneytree'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/8sp70jI.png" alt="Screenshot of Moneytree Simulator project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Moneytree Simulator</h3>
-                            <p class="text-gray-400 text-sm mb-4">A financial simulation where you make investment choices to achieve the best outcome.</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">Moneytree Simulator</h3>
+                            <p class="text-slate-400 text-sm mb-4">A rudimentary financial simulation where you are placed in the shoes of a random person. You must make the best possible investment and money allocation choices to achieve a high score, all while preparing for random life events.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Simulation</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: Plundr.io -->
-                    <a href="#" onclick="showPage('page-project-plundr'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/EFCaGl3.png" alt="Screenshot of Plundr.io project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Plundr.io</h3>
-                            <p class="text-gray-400 text-sm mb-4">A web-based multiplayer .io game about pirates. [TODO: Add description]</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">Plundr.io</h3>
+                            <p class="text-slate-400 text-sm mb-4">A concept for a web-based, multiplayer .io game with a pirate theme. The project involved planning real-time networking, authoritative server logic, and simple, scalable 2D graphics for browser-based play.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Project Card: Bread to Dough -->
-                    <a href="#" onclick="showPage('page-project-bread-to-dough'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                    <div class="project-card rounded-lg overflow-hidden block group">
                         <img class="w-full h-48 object-cover" src="https://i.imgur.com/3g9XuDG.png" alt="Screenshot of Bread to Dough project">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Bread to Dough</h3>
-                            <p class="text-gray-400 text-sm mb-4">A mobile game concept about running a bakery. [TODO: Add description]</p>
+                            <h3 class="text-xl font-semibold text-white mb-2">Bread to Dough</h3>
+                            <p class="text-slate-400 text-sm mb-4">A mobile game concept focused on running a bakery. The core loop involved resource management, customer orders, and expanding your business. This project was an exercise in designing for a mobile-first user experience.</p>
                             <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
                         </div>
-                    </a>
+                    </div>
 
                 </div>
             </section>
@@ -303,37 +347,37 @@
             <!-- Experience Section -->
             <section id="experience">
                 <h2 class="text-4xl font-bold text-white mb-8">Experience</h2>
-                <p class="text-lg text-gray-400 mb-8">Professional and leadership roles in research, web development, and education.</p>
+                <p class="text-lg text-slate-400 mb-8">Professional and leadership roles in research, web development, and education.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- ASSIP -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Research Intern (ASSIP)</h3>
-                        <p class="text-gray-400 text-sm mb-3">George Mason University, Virginia Serious Games Institute</p>
-                        <p class="text-gray-300">Co-developed educational games on media literacy ("The FACTory") and environmental planning ("Carbon City"). Published abstracts and presented at two university symposia.</p>
+                        <p class="text-slate-400 text-sm mb-3">George Mason University, Virginia Serious Games Institute</p>
+                        <p class="text-slate-300">Co-developed educational games on media literacy ("The FACTory") and environmental planning ("Carbon City"). Published abstracts and presented at two university symposia.</p>
                     </div>
                     <!-- KWF -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Game Development Team Lead</h3>
-                        <p class="text-gray-400 text-sm mb-3">Kashmir World Foundation (501c3)</p>
-                        <p class="text-gray-300">Led a 4-person team of developers and artists to create an educational wildlife game. Designed project timelines, coordinated weekly progress, and coded core gameplay features.</p>
+                        <p class="text-slate-400 text-sm mb-3">Kashmir World Foundation (501c3)</p>
+                        <p class="text-slate-300">Led a 4-person team of developers and artists to create an educational wildlife game. Designed project timelines, coordinated weekly progress, and coded core gameplay features.</p>
                     </div>
                     <!-- Up Integrated -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Web Development Project Lead</h3>
-                        <p class="text-gray-400 text-sm mb-3">Up Integrated Inc. (Federal Contracting Firm)</p>
-                        <p class="text-gray-300">Guided a 4-person team in the design, development, and launch of the company's first website, translating the founder's vision into a live product.</p>
+                        <p class="text-slate-400 text-sm mb-3">Up Integrated Inc. (Federal Contracting Firm)</p>
+                        <p class="text-slate-300">Guided a 4-person team in the design, development, and launch of the company's first website, translating the founder's vision into a live product.</p>
                     </div>
                     <!-- Evergent -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Data Management Platform Intern</h3>
-                        <p class="text-gray-400 text-sm mb-3">Evergent Technologies Inc.</p>
-                        <p class="text-gray-300">Created an internal data managing platform. Delivered a functional prototype for managing company records, earning positive feedback from executives.</p>
+                        <p class="text-slate-400 text-sm mb-3">Evergent Technologies Inc.</p>
+                        <p class="text-slate-300">Created an internal data managing platform. Delivered a functional prototype for managing company records, earning positive feedback from executives.</p>
                     </div>
                      <!-- Tutoring -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Mathematics Tutor</h3>
-                        <p class="text-gray-400 text-sm mb-3">Mathnasium & Freelance</p>
-                        <p class="text-gray-300">Extensive experience simplifying complex math concepts for 15+ students over 50+ hours, both as a freelance tutor and at Mathnasium.</p>
+                        <p class="text-slate-400 text-sm mb-3">Mathnasium & Freelance</p>
+                        <p class="text-slate-300">Extensive experience simplifying complex math concepts for 15+ students over 50+ hours, both as a freelance tutor and at Mathnasium.</p>
                     </div>
                 </div>
             </section>
@@ -341,20 +385,20 @@
             <!-- Research Section -->
             <section id="research">
                 <h2 class="text-4xl font-bold text-white mb-8">Research & Publications</h2>
-                <p class="text-lg text-gray-400 mb-8">Formal research contributions in AI and serious game development.</p>
+                <p class="text-lg text-slate-400 mb-8">Formal research contributions in AI and serious game development.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
                     <!-- Publication 1 -->
                     <div class="research-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">Emergence AI Reinforcement Learning Paper</h3>
-                        <p class="text-gray-400 mb-4">6-month independent study training AI models in custom Unity environments. Found decision frequency hyperparameter critical for stable policies.</p>
-                        <a href="https://doi.org/10.5281/zenodo.17394027" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">Read Full Text (DOI) &rarr;</a>
+                        <p class="text-slate-400 mb-4">6-month independent study training AI models in custom Unity environments. Found decision frequency hyperparameter critical for stable policies.</p>
+                        <a href="https://doi.org/10.5281/zenodo.17394027" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">Read Publication (DOI) &rarr;</a>
                     </div>
                     
                     <!-- Publication 2 -->
                     <div class="research-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">ASSIP Research Abstracts (VSGI)</h3>
-                        <p class="text-gray-400 mb-4">Published abstracts for "The FACTory" (media literacy) and "Carbon City" (environmental planning) in the ASSIP student research journal.</p>
+                        <p class="text-slate-400 mb-4">Published abstracts for "The FACTory" (media literacy) and "Carbon City" (environmental planning) in the ASSIP student research journal.</p>
                         <div class="flex flex-col space-y-2">
                             <a href="https://doi.org/10.13021/jssr2025.5271" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">"The FACTory" Abstract &rarr;</a>
                             <a href="https://doi.org/10.13021/jssr2025.5270" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">"Carbon City" Abstract &rarr;</a>
@@ -364,181 +408,34 @@
                     <!-- Research 3: NeuroQuest -->
                     <div class="research-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">NeuroQuest</h3>
-                        <p class="text-gray-400 mb-4">Research project (35+ hours) developing and testing game-based brain therapy applications for patients with neurodegenerative diseases.</p>
+                        <p class="text-slate-400 mb-4">Research project (35+ hours) developing and testing game-based brain therapy applications for patients with neurodegenerative diseases.</p>
                         <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">HealthTech</span>
                         <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Research</span>
                     </div>
                 </div>
             </section>
-        </section>
+        </div>
         
-        <!-- =================================================================== -->
-        <!--                         PROJECT DETAIL PAGES                        -->
-        <!-- =================================================================== -->
-        
-        <!-- Project Page: DECA Forge -->
-        <section id="page-project-deca-forge" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">DECA Forge</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/57DrV8u.png" alt="Screenshot of DECA Forge project">
-                <p><strong>Role:</strong> Project Lead, Tech Team Manager</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., React, Firebase, Node.js --> </p>
-                <p class="text-xl italic my-6">"Building a comprehensive management platform to automate operations for a 200:1 student-to-staff ratio in our DECA chapter."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Problem</h2>
-                <p>As our DECA chapter grew 300% to over 500 members, our 10-person student leadership team was overwhelmed. We faced bottlenecks in communication, event registration, and tracking member participation, all of which were handled manually through spreadsheets and email.</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Solution</h2>
-                <p>I initiated and led the development of "DECA Forge," a custom web platform to centralize all chapter operations. The platform aims to automate event sign-ups, track participation points, and provide a central communication hub for all members, effectively solving our 200:1 student-staff operational challenge.</p>
-            </div>
-        </section>
-        
-        <!-- Project Page: The FACTory -->
-        <section id="page-project-factory" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">The FACTory</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/UXuNm2e.png" alt="Screenshot of The FACTory project">
-                <p><strong>Role:</strong> Research Intern / Game Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
-                <p class="text-xl italic my-6">"An educational game on media literacy developed at the Virginia Serious Games Institute."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>As part of the Aspiring Scientists Summer Internship Program (ASSIP), I co-developed "The FACTory." This serious game is designed to teach students critical media literacy skills in an engaging way. My work involved [TODO: Describe your contribution, e.g., programming game mechanics, designing levels]. The game is currently deployed in partnership with Cognicade at local elementary schools, and our research abstract was published and presented at two university symposia.</p>
-            </div>
-        </section>
-
-        <!-- Project Page: EcoSpark -->
-        <section id="page-project-ecospark" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">EcoSpark</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/oAkEo30.png" alt="Screenshot of EcoSpark project">
-                <p><strong>Role:</strong> Co-Founder / Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
-                <p class="text-xl italic my-6">"A serious game that teaches players the importance of budgeting and environmental sustainability."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>Developed as part of Cognicade Studios, "EcoSpark" is a serious game that challenges players to manage personal budgets while making environmentally conscious decisions. The goal is to show the interconnectedness of financial health and environmental sustainability. [TODO: Add more details about the game].</p>
-            </div>
-        </section>
-
-        <!-- Project Page: The Rookie -->
-        <section id="page-project-rookie" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">The Rookie</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/meXg7fG.png" alt="Screenshot of The Rookie project">
-                <p><strong>Role:</strong> Game Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
-                <p class="text-xl italic my-6">"A first-person spy platformer with grappling, hacking, and a simulation plot twist."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>A first-person platformer inspired by Karlson and Portal where players use grappling, hacking, and energy blasting mechanics through a BURP device. Features a plot twist where the entire game is revealed to be a spy simulation test that players must escape.</p>
-            </div>
-        </section>
-
-        <!-- Project Page: Grading Hat -->
-        <section id="page-project-grading-hat" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">Grading Hat</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/Or5lDHs.png" alt="Screenshot of Grading Hat project">
-                <p><strong>Role:</strong> AI Developer / Project Lead</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Python, OpenAI API --> </p>
-                <p class="text-xl italic my-6">"An intelligent grading system that uses AI to assist educators in evaluating student work efficiently and consistently."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Features</h2>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li>AI-powered grading assistance</li>
-                    <li>Consistent evaluation standards</li>
-                    <li>Educational workflow integration</li>
-                    <li>Automated feedback generation</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Project Page: Christmas Chaos -->
-        <section id="page-project-christmas-chaos" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">Christmas Chaos</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/E2O37vK.png" alt="Screenshot of Christmas Chaos project">
-                <p><strong>Role:</strong> Game Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
-                <p class="text-xl italic my-6">"A game where you play as Santa trying to protect the golden present from an incoming horde of purple blobs."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>A top-down survival game where you play as Santa Claus trying to protect the golden present from an incoming horde of purple blobs for as long as you can. Players use a bow & arrow and a sword to fight off enemies. [TODO: Add more details, e.g., link to game].</p>
-            </div>
-        </section>
-
-        <!-- Project Page: Moneytree Simulator -->
-        <section id="page-project-moneytree" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">Moneytree Simulator</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/8sp70jI.png" alt="Screenshot of Moneytree Simulator project">
-                <p><strong>Role:</strong> Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Python --> </p>
-                <p class="text-xl italic my-6">"A rudimentary financial simulation to make the best possible investment and money allocation choices."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>This is a rudimentary financial simulation where you're placed in the shoes of a random person and must make the best possible investment and money allocation choices as possible to achieve the best outcome, all while preparing for random events that can help or hinder your progress.</p>
-            </div>
-        </section>
-
-        <!-- Project Page: Plundr.io -->
-        <section id="page-project-plundr" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">Plundr.io</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/EFCaGl3.png" alt="Screenshot of Plundr.io project">
-                <p><strong>Role:</strong> Game Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Node.js, Socket.io, HTML Canvas --> </p>
-                <p class="text-xl italic my-6">"A web-based multiplayer .io game about pirates."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>[TODO: Add a detailed description for this project. What was the goal? What did you build? What was the outcome?]</p>
-            </div>
-        </section>
-
-        <!-- Project Page: Bread to Dough -->
-        <section id="page-project-bread-to-dough" class="hidden">
-            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
-            <h1 class="text-4xl font-bold text-white mb-4">Bread to Dough</h1>
-            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
-                <img class="w-full rounded-lg shadow-lg mb-6" src="https://i.imgur.com/3g9XuDG.png" alt="Screenshot of Bread to Dough project">
-                <p><strong>Role:</strong> Game Designer / Developer</p>
-                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
-                <p class="text-xl italic my-6">"A mobile game concept about running a bakery."</p>
-                
-                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
-                <p>[TODO: Add a detailed description for this project. What was the goal? What did you build? What was the outcome?]</p>
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 mt-16 border-t border-gray-700">
+    <footer class="bg-slate-950 mt-16 border-t border-slate-700">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between items-center">
-            <div class="text-gray-400 text-sm text-center sm:text-left mb-4 sm:mb-0">
+            <div class="text-slate-400 text-sm text-center sm:text-left mb-4 sm:mb-0">
                 &copy; 2025 Ashmith Yaramada.
             </div>
             <div class="flex space-x-6">
-                <a href="mailto:ashuyaramada@gmail.com" class="text-gray-400 hover:text-white">
+                <a href="mailto:ashuyaramada@gmail.com" class="text-slate-400 hover:text-white">
                     <span class="sr-only">Email</span>
                     <!-- Email Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
-                <a href="https://github.com/AshmithY" target="_blank" class="text-gray-400 hover:text-white"> <!-- TODO: Update with your GitHub username -->
+                <a href="https://github.com/AshmithY" target="_blank" class="text-slate-400 hover:text-white">
                     <span class="sr-only">GitHub</span>
                     <!-- GitHub Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
                 </a>
-                <a href="#" target="_blank" class="text-gray-400 hover:text-white"> <!-- TODO: Update with your LinkedIn URL -->
+                <a href="#" target="_blank" class="text-slate-400 hover:text-white"> <!-- TODO: Update with your LinkedIn URL -->
                     <span class="sr-only">LinkedIn</span>
                     <!-- LinkedIn Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -547,50 +444,41 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Page Navigation -->
+    <!-- JavaScript for Mobile Menu -->
     <script>
-        // Store all page sections
-        const pages = document.querySelectorAll('main > section[id^="page-"]');
-        
-        function showPage(pageId, anchorId) {
-            // Hide all pages
-            pages.forEach(page => {
-                page.classList.add('hidden');
-            });
-
-            // Show the target page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
-                
-                if (anchorId) {
-                    // If an anchor is provided (like #projects), scroll to it
-                    const anchorElement = document.getElementById(anchorId);
-                    if (anchorElement) {
-                        anchorElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                } else {
-                    // Otherwise, scroll to the top of the new page
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
-        }
-
-        // --- Mobile Menu Toggle ---
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
-        function closeMenu() {
-            mobileMenu.classList.add('hidden');
-        }
 
-        // Show home page by default on initial load
-        document.addEventListener('DOMContentLoaded', () => {
-            showPage('page-home');
+        // Close menu when a link is clicked
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        
+        // Close menu when a nav link is clicked (for desktop layout, this won't do anything)
+        document.querySelector('nav').addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && !mobileMenu.classList.contains('hidden')) {
+                 mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 
