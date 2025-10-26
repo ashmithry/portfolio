@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Ashmith Yaramada - Portfolio</title>
+
+    <!-- START: Added Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236366f1'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Inter, sans-serif' font-size='50' font-weight='bold' fill='white'>AY</text></svg>">
+    <!-- END: Favicon -->
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,6 +40,12 @@
         }
     </script>
     <style>
+        /* START: Added CSS Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* END: Added CSS Smooth Scroll */
+
         body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -96,6 +106,7 @@
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-4">
+                    <!-- NOTE: Removed all onclick events -->
                     <a href="#about" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#initiatives" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Initiatives</a>
                     <a href="#projects" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
@@ -121,20 +132,31 @@
         <div id="page-home" class="space-y-24">
 
             <!-- About Section with Image -->
-            <section id="about" class="min-h-[70vh] flex items-center">
+            <section id="about" class="min-h-[70vh] flex items-center pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                     <div class="md:col-span-2">
                         <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">Hey, I'm Ashmith!</h1>
                         <p class="text-xl text-slate-300 max-w-2xl mb-8">
                             A motivated and organized student with a proven background in advanced computer science, mathematics, and entrepreneurship. Passionate about leveraging technology to create accessible, impactful educational tools and solutions.
                         </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#projects" class="text-white bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-md text-lg font-medium text-center">View Projects</a>
-                            <a href="#initiatives" class="text-slate-300 bg-slate-700 hover:bg-slate-600 px-6 py-3 rounded-md text-lg font-medium text-center">View Initiatives</a>
+                        <!-- START: Replaced buttons with social icons -->
+                        <div class="flex space-x-8 mt-8">
+                            <a href="https://www.linkedin.com/in/ashmith-yaramada-a357292a9/" target="_blank" class="text-slate-400 hover:text-indigo-400 transition-colors" aria-label="LinkedIn">
+                                <span class="sr-only">LinkedIn</span>
+                                <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="https://github.com/ashmithry" target="_blank" class="text-slate-400 hover:text-indigo-400 transition-colors" aria-label="GitHub">
+                                <span class="sr-only">GitHub</span>
+                                <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                            </a>
+                            <a href="mailto:ashuyaramada@gmail.com" class="text-slate-400 hover:text-indigo-400 transition-colors" aria-label="Email">
+                                <span class="sr-only">Email</span>
+                                <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            </a>
                         </div>
+                        <!-- END: Replaced buttons with social icons -->
                     </div>
                     <div class="md:col-span-1 flex justify-center">
-                        <!-- UPDATED IMAGE URL -->
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_5771-Awv8oVGnKbTlxlL4.jpeg"
                              alt="A photo of Ashmith Yaramada"
                              class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-slate-700 shadow-lg">
@@ -143,7 +165,7 @@
             </section>
 
             <!-- Showcase Section -->
-            <section id="showcase">
+            <section id="showcase" class="pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <h2 class="text-4xl font-bold text-white mb-8 text-center">2-Minute Showcase</h2>
                 <p class="text-lg text-slate-400 mb-8 text-center max-w-2xl mx-auto">Here's a quick video walkthrough of my work, my process, and what I'm passionate about.</p>
                 <div class="video-container shadow-lg">
@@ -159,14 +181,13 @@
             </section>
 
             <!-- Initiatives Section -->
-            <section id="initiatives">
+            <section id="initiatives" class="pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <h2 class="text-4xl font-bold text-white mb-8">Initiatives</h2>
                 <p class="text-lg text-slate-400 mb-12">Leading organizations to make a tangible impact in education and technology.</p>
                 <div class="space-y-20">
                     
                     <!-- Initiative 1: DECA -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <!-- UPDATED DECA IMAGE URL -->
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG" alt="Ashmith at a DECA event" class="rounded-lg shadow-lg object-cover w-full h-80 md:h-96">
                         <div>
                             <h3 class="text-3xl font-semibold text-white mb-3">John Champe DECA</h3>
@@ -248,7 +269,7 @@
             </section>
 
             <!-- Projects Section -->
-            <section id="projects">
+            <section id="projects" class="pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <h2 class="text-4xl font-bold text-white mb-8">Projects</h2>
                 <p class="text-lg text-slate-400 mb-8">Hands-on applications of my skills in software development, AI, and game design.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -347,7 +368,7 @@
             </section>
 
             <!-- Experience Section -->
-            <section id="experience">
+            <section id="experience" class="pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <h2 class="text-4xl font-bold text-white mb-8">Experience</h2>
                 <p class="text-lg text-slate-400 mb-8">Professional and leadership roles in research, web development, and education.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -362,7 +383,7 @@
                         <h3 class="text-xl font-semibold text-white mb-1">Game Development Team Lead</h3>
                         <p class="text-slate-400 text-sm mb-3">Kashmir World Foundation (501c3)</p>
                         <p class="text-slate-300">Led a 4-person team of developers and artists to create an educational wildlife game. Designed project timelines, coordinated weekly progress, and coded core gameplay features.</p>
-De                    </div>
+                    </div>
                     <!-- Up Integrated -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Web Development Project Lead</h3>
@@ -381,7 +402,7 @@ De                    </div>
                         <p class="text-slate-400 text-sm mb-3">Mathnasium & Freelance</p>
                         <p class="text-slate-300">Extensive experience simplifying complex math concepts for 15+ students over 50+ hours, both as a freelance tutor and at Mathnasium.</p>
                     </div>
-                    <!-- NEW: Student Server -->
+                    <!-- Student Server -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Student Server</h3>
                         <p class="text-slate-400 text-sm mb-3">Windows Restaurant at Ashby Ponds</p>
@@ -391,7 +412,7 @@ De                    </div>
             </section>
 
             <!-- Research Section -->
-            <section id="research">
+            <section id="research" class="pt-16 -mt-16"> <!-- Added padding/margin for scroll anchor -->
                 <h2 class="text-4xl font-bold text-white mb-8">Research & Publications</h2>
                 <p class="text-lg text-slate-400 mb-8">Formal research contributions in AI and serious game development.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -409,7 +430,7 @@ De                    </div>
                         <p class="text-slate-400 mb-4">Published abstracts for "The FACTory" (media literacy) and "Carbon City" (environmental planning) in the ASSIP student research journal.</p>
                         <div class="flex flex-col space-y-2">
                             <a href="https://doi.org/10.13021/jssr2025.5271" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">"The FACTory" Abstract &rarr;</a>
-                            <a href="https://doi.org/10.13021/jssr2025.5270" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">"Carbon City" Abstract &rarr;</a>
+                            <a href="httpsDoi.org/10.13021/jssr2025.5270" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">"Carbon City" Abstract &rarr;</a>
                         </div>
                     </div>
 
@@ -432,67 +453,44 @@ De                    </div>
             <div class="text-slate-400 text-sm text-center sm:text-left mb-4 sm:mb-0">
                 &copy; 2025 Ashmith Yaramada.
             </div>
+            <!-- START: Updated Social Links -->
             <div class="flex space-x-6">
-                <a href="mailto:ashuyaramada@gmail.com" class="text-slate-400 hover:text-white">
+                <a href="mailto:ashuyaramada@gmail.com" class="text-slate-400 hover:text-white" aria-label="Email">
                     <span class="sr-only">Email</span>
-                    <!-- Email Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
-                <a href="https://github.com/AshmithY" target="_blank" class="text-slate-400 hover:text-white">
+                <a href="https://github.com/ashmithry" target="_blank" class="text-slate-400 hover:text-white" aria-label="GitHub">
                     <span class="sr-only">GitHub</span>
-                    <!-- GitHub Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
                 </a>
-                <a href="#" target="_blank" class="text-slate-400 hover:text-white"> <!-- TODO: Update with your LinkedIn URL -->
+                <a href="https://www.linkedin.com/in/ashmith-yaramada-a357292a9/" target="_blank" class="text-slate-400 hover:text-white" aria-label="LinkedIn">
                     <span class="sr-only">LinkedIn</span>
-                    <!-- LinkedIn Icon SVG -->
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
             </div>
+            <!-- END: Updated Social Links -->
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu -->
+    <!-- START: Simplified JavaScript for Mobile Menu -->
     <script>
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        // Toggle menu open/close
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close menu when a link is clicked
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
+        // Add click listener to each mobile menu link to close the menu
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
-            }
-        });
-        
-        // Close menu when a nav link is clicked (for desktop layout, this won't do anything)
-        document.querySelector('nav').addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' && !mobileMenu.classList.contains('hidden')) {
-                 mobileMenu.classList.add('hidden');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-Services.obs.addObserver(function(aSubject, aTopic, aData) {
-  let url = aSubject.QueryInterface(Ci.nsIURI).spec;
-  console.log(url);
-}, "http-on-modify-request");
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
             });
         });
     </script>
+    <!-- END: Simplified JavaScript -->
 
 </body>
 </html>
