@@ -134,7 +134,8 @@
                         </div>
                     </div>
                     <div class="md:col-span-1 flex justify-center">
-                        <img src="https://i.imgur.com/YOUR_IMAGE_URL.jpg" <!-- TODO: Replace with your image URL -->
+                        <!-- UPDATED IMAGE URL -->
+                        <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_5771-Awv8oVGnKbTlxlL4.jpeg"
                              alt="A photo of Ashmith Yaramada"
                              class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-slate-700 shadow-lg">
                     </div>
@@ -165,7 +166,8 @@
                     
                     <!-- Initiative 1: DECA -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_3271-A85M0ORevgUD81zD.jpeg" alt="Ashmith at a DECA event" class="rounded-lg shadow-lg object-cover w-full h-80">
+                        <!-- UPDATED DECA IMAGE URL -->
+                        <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG" alt="Ashmith at a DECA event" class="rounded-lg shadow-lg object-cover w-full h-80 md:h-96">
                         <div>
                             <h3 class="text-3xl font-semibold text-white mb-3">John Champe DECA</h3>
                             <p class="text-slate-300 text-lg mb-6">As Chapter President, I spearheaded 289% membership growth, making us the 2nd largest chapter in Virginia. I manage a team of 10+ officers, lead community service initiatives, and am currently developing "FORGE," a platform to automate operations for our 198:1 student-to-advisor ratio.</p>
@@ -192,7 +194,7 @@
                     <!-- Initiative 2: Mini Makers -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div class="md:order-2">
-                            <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg" alt="Ashmith teaching students at Mini Makers" class="rounded-lg shadow-lg object-cover w-full h-80">
+                            <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg" alt="Ashmith teaching students at Mini Makers" class="rounded-lg shadow-lg object-cover w-full h-80 md:h-96">
                         </div>
                         <div class="md:order-1">
                             <h3 class="text-3xl font-semibold text-white mb-3">Mini Makers</h3>
@@ -219,7 +221,7 @@
 
                     <!-- Initiative 3: Cognicade Studios -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg" alt="Ashmith presenting Cognicade Studios projects" class="rounded-lg shadow-lg object-cover w-full h-80">
+                        <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg" alt="Ashmith presenting Cognicade Studios projects" class="rounded-lg shadow-lg object-cover w-full h-80 md:h-96">
                         <div>
                             <h3 class="text-3xl font-semibold text-white mb-3">Cognicade Studios</h3>
                             <p class="text-slate-300 text-lg mb-6">As Co-Founder and Lead Developer, I create "serious games" to bridge the engagement gap in education. We've developed 5+ games, won $1500+ in hackathons, and presented our work to over 90 students in-person, garnering positive feedback from students and teachers alike.</p>
@@ -360,7 +362,7 @@
                         <h3 class="text-xl font-semibold text-white mb-1">Game Development Team Lead</h3>
                         <p class="text-slate-400 text-sm mb-3">Kashmir World Foundation (501c3)</p>
                         <p class="text-slate-300">Led a 4-person team of developers and artists to create an educational wildlife game. Designed project timelines, coordinated weekly progress, and coded core gameplay features.</p>
-                    </div>
+De                    </div>
                     <!-- Up Integrated -->
                     <div class="exp-card rounded-lg p-6">
                         <h3 class="text-xl font-semibold text-white mb-1">Web Development Project Lead</h3>
@@ -378,6 +380,12 @@
                         <h3 class="text-xl font-semibold text-white mb-1">Mathematics Tutor</h3>
                         <p class="text-slate-400 text-sm mb-3">Mathnasium & Freelance</p>
                         <p class="text-slate-300">Extensive experience simplifying complex math concepts for 15+ students over 50+ hours, both as a freelance tutor and at Mathnasium.</p>
+                    </div>
+                    <!-- NEW: Student Server -->
+                    <div class="exp-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-white mb-1">Student Server</h3>
+                        <p class="text-slate-400 text-sm mb-3">Windows Restaurant at Ashby Ponds</p>
+                        <p class="text-slate-300">Managed service logistics for a 4-6 table section in a 100+ guest dining room. Coordinated with culinary staff to ensure order accuracy & timing in a fast-paced environment.</p>
                     </div>
                 </div>
             </section>
@@ -472,6 +480,10 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
+Services.obs.addObserver(function(aSubject, aTopic, aData) {
+  let url = aSubject.QueryInterface(Ci.nsIURI).spec;
+  console.log(url);
+}, "http-on-modify-request");
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     targetElement.scrollIntoView({
