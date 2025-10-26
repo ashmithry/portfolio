@@ -4,150 +4,395 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TODO: Change this to your name -->
-    <title>Your Name - Personal Portfolio</title>
+    <!-- TODO: Your Name -->
+    <title>Ashmith Yaramada - Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Support for dark mode and icons -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gray: {
+                            900: '#121212',
+                            800: '#1E1E1E',
+                            700: '#2A2A2A',
+                            600: '#3A3A3A',
+                            200: '#E5E7EB',
+                            100: '#F3F4F6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .project-card {
+            background-color: #1E1E1E; /* gray-800 */
+            border: 1px solid #3A3A3A; /* gray-600 */
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            border-color: #4F46E5; /* indigo-600 */
+            transform: translateY(-4px);
+        }
+        .tag {
+            background-color: #374151; /* gray-700 */
+            color: #D1D5DB; /* gray-300 */
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 antialiased">
+
+<body class="dark bg-gray-900 text-gray-200 font-sans">
 
     <!-- Header / Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="bg-gray-900 sticky top-0 z-50 border-b border-gray-700">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <!-- TODO: Change this to your name or initials -->
-                    <span class="text-2xl font-bold text-indigo-600">Your Name</span>
+                    <!-- TODO: Your Name -->
+                    <a href="#" onclick="showPage('page-home'); return false;" class="text-2xl font-bold text-white">Ashmith Yaramada</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="#about" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                    <a href="#projects" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-                    <a href="#contact" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <a href="#about" onclick="showPage('page-home', 'about'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#initiatives" onclick="showPage('page-home', 'initiatives'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Initiatives</a>
+                    <a href="#projects" onclick="showPage('page-home', 'projects'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                    <a href="#research" onclick="showPage('page-home', 'research'); return false;" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Research</a>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Main Content -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <!-- Hero / About Section -->
-        <section id="about" class="bg-white shadow-lg rounded-2xl overflow-hidden p-8 sm:p-12 mb-12">
-            <div class="flex flex-col md:flex-row items-center">
-                <!-- TODO: Find a simple, professional-looking photo of yourself, host it online (e.g., on Imgur), and paste the link here. -->
-                <!-- A good placeholder: https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo -->
-                <img class="h-40 w-40 rounded-full object-cover shadow-md mb-6 md:mb-0 md:mr-8 flex-shrink-0" 
-                     src="https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo" 
-                     alt="A professional photo of yourself"
-                     onerror="this.src='https://placehold.co/160x160/E0E7FF/4F46E5?text=Your+Photo'">
-                
+        <!-- =================================================================== -->
+        <!--                            HOME PAGE                                -->
+        <!-- =================================================================== -->
+        <section id="page-home" class="space-y-24">
+
+            <!-- About Section -->
+            <section id="about" class="min-h-[60vh] flex items-center">
                 <div>
-                    <!-- TODO: Change this to your name -->
-                    <h1 class="text-4xl font-bold text-gray-900 mb-2">Hi, I'm Your Name</h1>
+                    <h1 class="text-5xl font-bold text-white mb-4">Hey, I'm Ashmith!</h1>
+                    <p class="text-xl text-gray-300 max-w-3xl mb-8">
+                        A highly motivated and organized student with a proven background in advanced computer science, mathematics, and entrepreneurship. Passionate about leveraging technology to create accessible, impactful educational tools and solutions.
+                    </p>
                     
-                    <!-- TODO: Write 1-2 paragraphs about yourself. What are you passionate about? What are your goals? What are you studying? -->
-                    <p class="text-lg text-gray-700 mb-4">
-                        I'm a passionate and motivated high school student with a deep interest in [Your Interest, e.g., computer science, biotechnology, visual arts]. I love solving complex problems and building tangible projects that can make a difference.
-                    </p>
-                    <p class="text-lg text-gray-700">
-                        I'm currently seeking to bring my skills in [Skill 1] and [Skill 2] to a challenging and collaborative university environment. I'm eager to contribute to meaningful research and grow as both a leader and an innovator.
-                    </p>
+                    <!-- Academic Distinctions -->
+                    <h2 class="text-2xl font-semibold text-white mb-4">Academic Distinctions</h2>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Summa Cum Laude - Top 5% of Graduating Class (est. top 10/436)</li>
+                        <li>National Merit Commended Scholar (1490 PSAT, >99th percentile)</li>
+                        <li>AP Scholar with Distinction (12 APs: ten 5s, two 4s)</li>
+                        <li>2024-25 John Champe HS CTE Department Award</li>
+                    </ul>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">My Projects</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Initiatives Section -->
+            <section id="initiatives">
+                <h2 class="text-4xl font-bold text-white mb-8">Initiatives</h2>
+                <p class="text-lg text-gray-400 mb-8">Leading organizations to make a tangible impact in education and technology.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- DECA Card -->
+                    <div class="project-card rounded-lg p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">DECA Chapter President</h3>
+                        <p class="text-gray-400 mb-4">Led Virginia's 2nd largest DECA chapter (500+ members). Spearheaded 300% membership growth. Managed 10+ officers and a 5-member tech team.</p>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Leadership</span>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Management</span>
+                    </div>
+                    
+                    <!-- Mini Makers Card -->
+                    <div class="project-card rounded-lg p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Mini Makers</h3>
+                        <p class="text-gray-400 mb-4">Co-Founder & Co-CEO of an educational initiative with $1k+ revenue. Taught 400+ students, developed an affordable curriculum (<\$20/hr), and donated over $2k to charity.</p>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">EdTech</span>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Entrepreneurship</span>
+                    </div>
 
-                <!-- TODO: Project 1 -->
-                <!-- Duplicate this 'project-card' block for each project you want to showcase. 3-4 good projects is ideal. -->
-                <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
-                    <!-- TODO: Add a link to an image for your project. -->
-                    <!-- Placeholder: https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot -->
-                    <img src="https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot" alt="Screenshot of Project 1" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+1+Screenshot'">
-                    <div class="p-6">
-                        <!-- TODO: Add your project's title -->
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Project Title 1</h3>
-                        <!-- TODO: Add a 1-2 sentence description of your project. What problem does it solve? What tech did you use? -->
-                        <p class="text-gray-700 mb-4">
-                            A brief description of your project. For example: "A web application built with Python and Flask that helps students track their homework and study habits."
-                        </p>
-                        <!-- TODO: Add the link to your project (e.g., GitHub repo, live demo, or a Google Doc with more info) -->
-                        <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition-colors">
-                            View Project
-                        </a>
+                    <!-- Cognicade Studios Card -->
+                    <div class="project-card rounded-lg p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Cognicade Studios</h3>
+                        <p class="text-gray-400 mb-4">Co-Founder & Creative Director. Developed 3 educational games with 10k+ total plays. Won multiple prizes ($2.2k+). Proposing game dev curriculum to LCPS.</p>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
+                        <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">EdTech</span>
                     </div>
                 </div>
-                <!-- End Project 1 Card -->
+            </section>
 
-                <!-- TODO: Project 2 -->
-                <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
-                    <!-- TODO: Add a link to an image for your project. -->
-                    <!-- Placeholder: https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot -->
-                    <img src="https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot" alt="Screenshot of Project 2" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/F3F4F6/9CA3AF?text=Project+2+Screenshot'">
-                    <div class="p-6">
-                        <!-- TODO: Add your project's title -->
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Project Title 2</h3>
-                        <!-- TODO: Add a 1-2 sentence description of your project. -->
-                        <p class="text-gray-700 mb-4">
-                            A description of your second project. For example: "An award-winning science fair project that analyzed local water quality, presented with a data visualization dashboard."
-                        </p>
-                        <!-- TODO: Add the link to your project -->
-                        <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-5 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition-colors">
-                            View Project
-                        </a>
+            <!-- Projects Section -->
+            <section id="projects">
+                <h2 class="text-4xl font-bold text-white mb-8">Projects</h2>
+                <p class="text-lg text-gray-400 mb-8">Hands-on applications of my skills in software development, management, and research.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project Card: DECA Forge -->
+                    <a href="#" onclick="showPage('page-project-deca'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">DECA Forge</h3>
+                            <p class="text-gray-400 text-sm mb-4">A comprehensive management platform to automate operations for a 200:1 student-to-staff ratio in our DECA chapter.</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Web Dev</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Automation</span>
+                        </div>
+                    </a>
+
+                    <!-- Project Card: NeuroQuest -->
+                    <a href="#" onclick="showPage('page-project-neuroquest'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">NeuroQuest</h3>
+                            <p class="text-gray-400 text-sm mb-4">A research project developing game-based brain therapy for neurodegenerative diseases (35+ hours).</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Research</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">HealthTech</span>
+                        </div>
+                    </a>
+
+                    <!-- Project Card: Kashmir World Foundation -->
+                    <a href="#" onclick="showPage('page-project-kwf'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Kashmir World Foundation</h3>
+                            <p class="text-gray-400 text-sm mb-4">Led a team of 4 (devs, artists) as Game Development Team Lead for an educational wildlife game. Designed timelines and coded core gameplay.</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Game Dev</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Management</span>
+                        </div>
+                    </a>
+
+                    <!-- Project Card: Up Integrated -->
+                    <a href="#" onclick="showPage('page-project-upintegrated'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Up Integrated Inc.</h3>
+                            <p class="text-gray-400 text-sm mb-4">Web Development Project Lead. Guided a 4-person team in the design, development, and launch of the federal contracting firm's first website.</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Web Dev</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Management</span>
+                        </div>
+                    </a>
+
+                    <!-- Project Card: Evergent -->
+                    <a href="#" onclick="showPage('page-project-evergent'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Evergent Technologies Inc.</h3>
+                            <p class="text-gray-400 text-sm mb-4">Internship. Created an internal data management platform. Delivered a functional prototype for managing company records.</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Web Dev</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Internship</span>
+                        </div>
+                    </a>
+                    
+                    <!-- Project Card: Tutoring -->
+                    <a href="#" onclick="showPage('page-project-tutoring'); return false;" class="project-card rounded-lg overflow-hidden block group">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-indigo-400">Mathematics Tutoring</h3>
+                            <p class="text-gray-400 text-sm mb-4">Extensive experience as a tutor at Mathnasium and as a freelance tutor (50+ hours, 15+ students).</p>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Education</span>
+                            <span class="tag text-xs font-medium px-2.5 py-0.5 rounded-full">Mathematics</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Research Section -->
+            <section id="research">
+                <h2 class="text-4xl font-bold text-white mb-8">Research & Publications</h2>
+                <p class="text-lg text-gray-400 mb-8">Formal research contributions in AI and serious game development.</p>
+                <div class="space-y-6">
+                    
+                    <!-- Publication 1 -->
+                    <div class="project-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">Emergence AI Reinforcement Learning Paper</h3>
+                        <p class="text-gray-400 mb-4">6-month independent study training AI models in custom Unity environments. Found decision frequency hyperparameter critical for stable policies. Mentored by Dr. Aditya Vempaty.</p>
+                        <a href="https://doi.org/10.5281/zenodo.17394027" target="_blank" class="text-indigo-400 hover:text-indigo-300">Read Publication (DOI) &rarr;</a>
+                    </div>
+                    
+                    <!-- Publication 2 -->
+                    <div class="project-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">ASSIP Research (Virginia Serious Games Institute)</h3>
+                        <p class="text-gray-400 mb-4">Co-developed educational games on media literacy and environmental planning. Presented at two university symposia.</p>
+                        <div class="flex space-x-4">
+                            <a href="https://doi.org/10.13021/jssr2025.5271" target="_blank" class="text-indigo-400 hover:text-indigo-300">"The FACTory" Abstract &rarr;</a>
+                            <a href="https://doi.org/10.13021/jssr2025.5270" target="_blank" class="text-indigo-400 hover:text-indigo-300">"Carbon City" Abstract &rarr;</a>
+                        </div>
                     </div>
                 </div>
-                <!-- End Project 2 Card -->
+            </section>
+        </section>
+        
+        <!-- =================================================================== -->
+        <!--                         PROJECT DETAIL PAGES                        -->
+        <!-- =================================================================== -->
+        
+        <!-- TODO: Fill out these project pages with more detail. I've added placeholders based on your essay prompt. -->
 
-                <!-- Add more project cards here if needed -->
-
+        <!-- Project Page: DECA Forge -->
+        <section id="page-project-deca" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">DECA Forge</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Project Lead, Tech Team Manager</p>
+                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., React, Firebase, Node.js --> </p>
+                <p class="text-xl italic my-6">"Building a comprehensive management platform to automate operations for a 200:1 student-to-staff ratio in our DECA chapter."</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Problem</h2>
+                <p><!-- TODO: Expand on the problem here. Use your essay content. -->As our DECA chapter grew 300% to over 500 members, our 10-person student leadership team was overwhelmed. We faced bottlenecks in communication, event registration, and tracking member participation, all of which were handled manually through spreadsheets and email.</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Solution</h2>
+                <p><!-- TODO: Describe your solution. -->I initiated and led the development of "DECA Forge," a custom web platform to centralize all chapter operations. The platform aims to automate event sign-ups, track participation points, and provide a central communication hub for all members, effectively solving our 200:1 student-staff operational challenge.</p>
+                
+                <!-- TODO: Add an image of the project if you have one -->
+                <!-- <img src="placeholder.jpg" alt="DECA Forge Screenshot" class="rounded-lg shadow-lg my-8"> -->
             </div>
         </section>
 
-        <!-- Contact / Links Section -->
-        <section id="contact" class="mt-16 text-center">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-            <p class="text-lg text-gray-700 mb-8">
-                I'm always open to new opportunities and collaborations.
-            </p>
-            <div class="flex justify-center space-x-6">
-                
-                <!-- TODO: Add your email address -->
-                <a href="mailto:your.email@example.com" class="inline-block bg-white text-gray-700 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                    Email Me
-                </a>
-                
-                <!-- TODO: Add a link to your LinkedIn profile -->
-                <a href="#" class="inline-block bg-indigo-600 text-white font-medium px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
-                    View LinkedIn
-                </a>
-                
-                <!-- TODO: (Optional) Add a link to your PDF resume (you can host it on Google Drive) -->
-                <a href="#" class="inline-block bg-white text-gray-700 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                    View Resume (PDF)
-                </a>
+        <!-- Project Page: NeuroQuest -->
+        <section id="page-project-neuroquest" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">NeuroQuest</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Researcher, Developer</p>
+                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C# --> </p>
+                <p class="text-xl italic my-6">"A research project developing game-based brain therapy for neurodegenerative diseases."</p>
+
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
+                <p><!-- TODO: Expand on this project. -->Over 35+ hours, I contributed to the research and development of NeuroQuest. The project's goal is to create engaging, accessible video games that can function as therapeutic tools to slow cognitive decline in patients with neurodegenerative diseases. My work involved [TODO: describe your specific contribution].</p>
             </div>
         </section>
 
-    </div>
+        <!-- Project Page: Kashmir World Foundation -->
+        <section id="page-project-kwf" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">Kashmir World Foundation</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Game Development Team Lead</p>
+                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., Unity, C#, Blender --> </p>
+                <p class="text-xl italic my-6">"Led a team of 4 (devs, artists) for an educational wildlife game. Designed project timelines, coordinated weekly progress, and coded core gameplay features."</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">My Role</h2>
+                <p><!-- TODO: Expand on this project. -->As the team lead, I was responsible for more than just code. I created the project roadmap, set weekly milestones, and coordinated between the developers and artists to ensure our work was cohesive. I also programmed the core player movement and interaction mechanics for the game.</p>
+            </div>
+        </section>
+        
+        <!-- Project Page: Up Integrated -->
+        <section id="page-project-upintegrated" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">Up Integrated Inc. Website</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Web Development Project Lead</p>
+                <p><strong>Technology:</strong> <!-- TODO: List tech stack, e.g., WordPress, HTML, CSS --> </p>
+                <p class="text-xl italic my-6">"Guided a 4-person team in the design, development, and launch of the federal contracting firm's first website."</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
+                <p><!-- TODO: Expand on this project. -->I translated the founder's vision into a concrete plan. I led a small team to build and launch the company's first-ever website, establishing their online presence. The live site can be viewed at <a href="https://upintegrated.com" target="_blank" class="text-indigo-400 hover:text-indigo-300">upintegrated.com</a>.</p>
+            </div>
+        </section>
+        
+        <!-- Project Page: Evergent -->
+        <section id="page-project-evergent" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">Internal Data Management Platform</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Data Management Platform Development Intern</p>
+                <p><strong>Technology:</strong> <!-- TODO: List tech stack --> </p>
+                <p class="text-xl italic my-6">"Created an internal data managing platform. Delivered a functional prototype for managing company records, earning positive feedback from executives."</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Overview</h2>
+                <p><!-- TODO: Expand on this project. -->During my internship at Evergent Technologies, I was tasked with developing a tool to streamline internal data management. I built a functional prototype that demonstrated a new, more efficient way for the company to manage its records.</p>
+            </div>
+        </section>
+
+        <!-- Project Page: Tutoring -->
+        <section id="page-project-tutoring" class="hidden">
+            <a href="#" onclick="showPage('page-home', 'projects'); return false;" class="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">&larr; Back to all projects</a>
+            <h1 class="text-4xl font-bold text-white mb-4">Mathematics Tutoring</h1>
+            <div class="text-lg text-gray-300 max-w-3xl space-y-4">
+                <p><strong>Role:</strong> Tutor</p>
+                <p><strong>Skills:</strong> Simplifying Complex Concepts, Curriculum Development, Student-Centered Instruction</p>
+                <p class="text-xl italic my-6">"Experienced in simplifying complex topics and helping students build confidence and excel in mathematics."</p>
+                
+                <h2 class="text-2xl font-semibold text-white pt-4 mb-2">Experience</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong>Mathnasium (12th Grade):</strong> Managed instruction for students in various math subjects.</li>
+                    <li><strong>Freelance Tutor (9th-10th Grade):</strong> Mentored 15+ students over 50+ hours, developing custom learning plans.</li>
+                    <li><strong>Mini Makers (10th-12th Grade):</strong> Co-founded and led instruction, simplifying complex technical concepts for 400+ students.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white mt-16 border-t border-gray-200">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500 text-sm">
-            <!-- TODO: Change "Your Name" -->
-            &copy; 2025 Your Name. All rights reserved.
+    <footer class="bg-gray-900 mt-16 border-t border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-between items-center">
+            <div class="text-gray-400 text-sm">
+                <!-- TODO: Your Name -->
+                &copy; 2025 Ashmith Yaramada.
+            </div>
+            <!-- TODO: Add your social/contact links -->
+            <div class="flex space-x-6">
+                <a href="mailto:ashuyaramada@gmail.com" class="text-gray-400 hover:text-white">
+                    <span class="sr-only">Email</span>
+                    <!-- Email Icon SVG -->
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://github.com/AshmithY" target="_blank" class="text-gray-400 hover:text-white"> <!-- TODO: Update with your GitHub username -->
+                    <span class="sr-only">GitHub</span>
+                    <!-- GitHub Icon SVG -->
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-white"> <!-- TODO: Update with your LinkedIn URL -->
+                    <span class="sr-only">LinkedIn</span>
+                    <!-- LinkedIn Icon SVG -->
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </div>
         </div>
     </footer>
 
+    <!-- JavaScript for Page Navigation -->
+    <script>
+        // Store all page sections
+        const pages = document.querySelectorAll('main > section[id^="page-"]');
+        
+        function showPage(pageId, anchorId) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show the target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                
+                if (anchorId) {
+                    // If an anchor is provided (like #projects), scroll to it
+                    const anchorElement = document.getElementById(anchorId);
+                    if (anchorElement) {
+                        anchorElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else {
+                    // Otherwise, scroll to the top of the new page
+                    window.scrollTo(0, 0);
+                }
+            }
+        }
+
+        // Show home page by default on initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('page-home');
+        });
+    </script>
+
 </body>
 </html>
+
