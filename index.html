@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -29,17 +32,12 @@
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        'abyssal': {
-                            900: '#0a0e17',
-                            950: '#050810',
-                        }
                     }
                 }
             }
@@ -53,6 +51,27 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #050810;
+            --bg-secondary: #0a0e17;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-indigo: #6366f1;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --border-color: rgba(100, 116, 139, 0.2);
+            --card-bg: rgba(30, 41, 59, 0.4);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: rgba(100, 116, 139, 0.2);
+            --card-bg: rgba(248, 250, 252, 0.8);
+        }
+
         html.lenis {
             height: auto;
         }
@@ -61,28 +80,17 @@
             scroll-behavior: auto;
         }
 
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-
-        .lenis.lenis-scrolling iframe {
-            pointer-events: none;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background: #050810;
-            color: #e2e8f0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Noise Texture Overlay */
+        /* Noise Texture */
         body::before {
             content: '';
             position: fixed;
@@ -96,7 +104,7 @@
             opacity: 0.4;
         }
 
-        /* Ambient Background Gradient Orbs */
+        /* Ambient Background Orbs */
         .bg-orbs {
             position: fixed;
             top: 0;
@@ -114,12 +122,13 @@
             filter: blur(80px);
             opacity: 0.3;
             animation: float 20s infinite ease-in-out;
+            transition: background 0.3s ease;
         }
 
         .orb-1 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
             top: -10%;
             left: -10%;
             animation-delay: 0s;
@@ -128,7 +137,7 @@
         .orb-2 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
             top: 40%;
             right: -5%;
             animation-delay: 5s;
@@ -137,7 +146,7 @@
         .orb-3 {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
             bottom: -20%;
             left: 30%;
             animation-delay: 10s;
@@ -156,19 +165,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #050810;
+            background: var(--bg-primary);
             z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            transition: background-color 0.3s ease;
         }
 
         .loader-text {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -178,13 +188,13 @@
         .loader-percentage {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
-            color: #94a3b8;
+            color: var(--text-secondary);
         }
 
         .loader-bar {
             width: 300px;
             height: 3px;
-            background: #1e293b;
+            background: var(--border-color);
             border-radius: 10px;
             overflow: hidden;
             margin-top: 1rem;
@@ -192,42 +202,78 @@
 
         .loader-progress {
             height: 100%;
-            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
             width: 0%;
             transition: width 0.3s ease;
         }
 
-        /* Glassmorphic Navbar */
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.6);
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 6rem;
+            right: 2rem;
+            z-index: 1000;
+            width: 60px;
+            height: 32px;
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Glassmorphic Cards */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
+        .theme-toggle-inner {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        [data-theme="light"] .theme-toggle-inner {
+            transform: translateX(28px);
+        }
+
+        /* Glassmorphic Navbar */
+        .glass-nav {
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(99, 102, 241, 0.5);
+            background: var(--card-bg);
+            border-color: var(--accent-indigo);
             transform: translateY(-4px);
         }
 
-        /* Magnetic Button Effect */
+        /* Magnetic Button */
         .magnetic-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
             color: white;
             font-weight: 600;
             border-radius: 9999px;
@@ -243,7 +289,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -280,7 +326,7 @@
             opacity: 1;
         }
 
-        /* Social Icons with Magnetic Effect */
+        /* Social Icons */
         .social-icon {
             display: inline-flex;
             align-items: center;
@@ -288,25 +334,24 @@
             width: 3rem;
             height: 3rem;
             border-radius: 50%;
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(100, 116, 139, 0.2);
-            color: #94a3b8;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .social-icon:hover {
             background: rgba(99, 102, 241, 0.2);
-            border-color: #6366f1;
-            color: #6366f1;
+            border-color: var(--accent-indigo);
+            color: var(--accent-indigo);
             transform: scale(1.1);
         }
 
-        /* Custom Underline Animation */
+        /* Underline Link */
         .underline-link {
             position: relative;
             text-decoration: none;
-            color: #94a3b8;
+            color: var(--text-secondary);
             transition: color 0.3s ease;
         }
 
@@ -317,24 +362,36 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
             transition: width 0.3s ease;
         }
 
         .underline-link:hover {
-            color: #e2e8f0;
+            color: var(--text-primary);
         }
 
         .underline-link:hover::after {
             width: 100%;
         }
 
-        /* Hero Image Morphing Blob */
-        .blob-mask {
+        /* 3D Canvas Container */
+        #gameboy-canvas {
+            width: 100%;
+            height: 500px;
+            max-width: 500px;
+            cursor: grab;
+        }
+
+        #gameboy-canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Hero Image Glow */
+        .hero-image-glow {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation: morph 8s ease-in-out infinite;
             box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
-            border: 3px solid rgba(99, 102, 241, 0.3);
+            border: 3px solid var(--accent-indigo);
         }
 
         @keyframes morph {
@@ -351,14 +408,13 @@
             top: 0;
             width: 2px;
             height: 100%;
-            background: #1e293b;
+            background: var(--border-color);
         }
 
         .timeline-line-progress {
             width: 100%;
             height: 0%;
-            background: linear-gradient(180deg, #6366f1, #06b6d4);
-            transition: height 0.3s ease;
+            background: linear-gradient(180deg, var(--accent-indigo), var(--accent-cyan));
         }
 
         .timeline-dot {
@@ -367,9 +423,9 @@
             top: 0.5rem;
             width: 1.25rem;
             height: 1.25rem;
-            background: #6366f1;
+            background: var(--accent-indigo);
             border-radius: 50%;
-            border: 3px solid #050810;
+            border: 3px solid var(--bg-primary);
             z-index: 10;
         }
 
@@ -378,10 +434,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-        }
-
-        .bento-item {
-            min-height: 400px;
         }
 
         @media (min-width: 768px) {
@@ -406,7 +458,7 @@
             }
         }
 
-        /* Video Container Glow */
+        /* Video Glow */
         .video-glow {
             position: relative;
             border-radius: 1rem;
@@ -420,7 +472,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, #6366f1, #06b6d4, #8b5cf6);
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan), var(--accent-purple));
             border-radius: 1rem;
             z-index: -1;
             opacity: 0.5;
@@ -444,7 +496,7 @@
             border-radius: 1rem;
         }
 
-        /* Tag Styles */
+        /* Tech Tags */
         .tech-tag {
             display: inline-block;
             padding: 0.375rem 0.875rem;
@@ -458,7 +510,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Project Card Image Parallax */
+        /* Project Card Image */
         .project-image-wrapper {
             overflow: hidden;
             height: 250px;
@@ -476,18 +528,79 @@
             transform: scale(1.05);
         }
 
-        /* Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
+        /* Expander */
+        .expander-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .reveal-active {
-            opacity: 1;
-            transform: translateY(0);
+        .expander-content.active {
+            max-height: 1000px;
         }
 
-        /* Stats Grid */
+        .expander-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--accent-indigo);
+            color: var(--accent-indigo);
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .expander-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .expander-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expander-icon.active {
+            transform: rotate(180deg);
+        }
+
+        /* Awards Ticker */
+        .awards-ticker {
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem 0;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0 3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .ticker-icon {
+            color: var(--accent-indigo);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Stats */
         .stat-item {
             text-align: center;
             padding: 1rem;
@@ -496,7 +609,7 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -505,11 +618,17 @@
 
         .stat-label {
             font-size: 0.875rem;
-            color: #94a3b8;
+            color: var(--text-secondary);
             margin-top: 0.5rem;
         }
 
-        /* Mobile Responsiveness */
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .loader-text {
                 font-size: 2.5rem;
@@ -519,19 +638,16 @@
                 font-size: 2rem;
             }
 
-            .bento-grid {
-                grid-template-columns: 1fr;
+            #gameboy-canvas {
+                height: 300px;
             }
 
-            .bento-item:nth-child(1),
-            .bento-item:nth-child(2),
-            .bento-item:nth-child(3) {
-                grid-column: auto;
-                grid-row: auto;
+            .theme-toggle {
+                top: 5rem;
+                right: 1rem;
             }
         }
 
-        /* Hide scrollbar but keep functionality */
         ::-webkit-scrollbar {
             display: none;
         }
@@ -553,7 +669,14 @@
         </div>
     </div>
 
-    <!-- Ambient Background Gradient Orbs -->
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="theme-toggle">
+        <div class="theme-toggle-inner">
+            <i class="ph ph-moon text-sm"></i>
+        </div>
+    </div>
+
+    <!-- Ambient Background Orbs -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -564,12 +687,10 @@
     <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <a href="#hero" class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-xl font-bold font-display shadow-lg shadow-indigo-500/50">
                     AY
                 </a>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="underline-link font-medium">About</a>
                     <a href="#initiatives" class="underline-link font-medium">Initiatives</a>
@@ -578,20 +699,18 @@
                     <a href="#research" class="underline-link font-medium">Research</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white">
+                <button id="mobile-menu-btn" class="md:hidden" style="color: var(--text-primary);">
                     <i class="ph ph-list text-3xl"></i>
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-6">
                 <div class="flex flex-col space-y-4">
-                    <a href="#about" class="text-slate-300 hover:text-white font-medium">About</a>
-                    <a href="#initiatives" class="text-slate-300 hover:text-white font-medium">Initiatives</a>
-                    <a href="#projects" class="text-slate-300 hover:text-white font-medium">Projects</a>
-                    <a href="#experience" class="text-slate-300 hover:text-white font-medium">Experience</a>
-                    <a href="#research" class="text-slate-300 hover:text-white font-medium">Research</a>
+                    <a href="#about" style="color: var(--text-secondary);" class="hover:text-white font-medium">About</a>
+                    <a href="#initiatives" style="color: var(--text-secondary);" class="hover:text-white font-medium">Initiatives</a>
+                    <a href="#projects" style="color: var(--text-secondary);" class="hover:text-white font-medium">Projects</a>
+                    <a href="#experience" style="color: var(--text-secondary);" class="hover:text-white font-medium">Experience</a>
+                    <a href="#research" style="color: var(--text-secondary);" class="hover:text-white font-medium">Research</a>
                 </div>
             </div>
         </div>
@@ -607,29 +726,28 @@
                     <div class="order-2 lg:order-1">
                         <div class="reveal">
                             <h1 class="text-6xl lg:text-7xl font-bold font-display mb-6 leading-tight">
-                                <span class="block text-white hero-text">Innovator.</span>
-                                <span class="block text-white hero-text">Leader.</span>
+                                <span class="block hero-text" style="color: var(--text-primary);">Innovator.</span>
+                                <span class="block hero-text" style="color: var(--text-primary);">Leader.</span>
                                 <span class="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent hero-text">Developer.</span>
                             </h1>
                         </div>
 
                         <div class="reveal">
-                            <p class="text-xl lg:text-2xl text-slate-300 mb-8 leading-relaxed">
-                                Combining <span class="text-indigo-400 font-semibold">Mathematics</span>,
-                                <span class="text-cyan-400 font-semibold">Computer Science</span>, and
-                                <span class="text-purple-400 font-semibold">Entrepreneurship</span> to create
-                                accessible, impactful educational tools and solutions.
+                            <p class="text-xl lg:text-2xl mb-8 leading-relaxed" style="color: var(--text-secondary);">
+                                Bridging <span class="font-semibold" style="color: var(--accent-indigo);">Advanced Mathematics</span>,
+                                <span class="font-semibold" style="color: var(--accent-cyan);">Computer Science</span>, and
+                                <span class="font-semibold" style="color: var(--accent-purple);">Entrepreneurship</span> to build
+                                impactful solutions.
                             </p>
                         </div>
 
                         <div class="reveal flex flex-wrap gap-4 mb-10">
                             <a href="#projects" class="magnetic-btn">
-                                <span>Explore Work</span>
+                                <span>View Work</span>
                                 <i class="ph ph-arrow-down"></i>
                             </a>
                         </div>
 
-                        <!-- Social Links -->
                         <div class="reveal flex gap-4">
                             <a href="https://www.linkedin.com/in/ashmith-yaramada-a357292a9/" target="_blank" class="social-icon" aria-label="LinkedIn">
                                 <i class="ph ph-linkedin-logo text-2xl"></i>
@@ -643,43 +761,33 @@
                         </div>
                     </div>
 
-                    <!-- Hero Image -->
-                    <div class="order-1 lg:order-2 flex justify-center lg:justify-end reveal">
-                        <div class="blob-mask w-80 h-80 lg:w-96 lg:h-96 overflow-hidden">
-                            <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_5771-Awv8oVGnKbTlxlL4.jpeg"
-                                 alt="Ashmith Yaramada"
-                                 class="w-full h-full object-cover">
+                    <!-- 3D Game Boy & Headshot -->
+                    <div class="order-1 lg:order-2 reveal">
+                        <div class="grid grid-cols-2 gap-8 items-center">
+                            <!-- 3D Game Boy -->
+                            <div>
+                                <canvas id="gameboy-canvas"></canvas>
+                            </div>
+                            <!-- Headshot -->
+                            <div class="flex justify-center">
+                                <div class="hero-image-glow w-48 h-48 lg:w-56 lg:h-56 overflow-hidden">
+                                    <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/img_5771-Awv8oVGnKbTlxlL4.jpeg"
+                                         alt="Ashmith Yaramada"
+                                         class="w-full h-full object-cover">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-32 px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="reveal text-center mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">About Me</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto"></div>
-                </div>
-
-                <div class="reveal max-w-4xl mx-auto">
-                    <p class="text-xl text-slate-300 leading-relaxed text-center">
-                        A motivated and organized student with a proven background in advanced computer science,
-                        mathematics, and entrepreneurship. Passionate about leveraging technology to create
-                        accessible, impactful educational tools and solutions that make a real difference
-                        in people's lives.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Video Showcase Section -->
-        <section id="showcase" class="py-32 px-6 lg:px-8 bg-black/30">
+        <!-- Video Showcase -->
+        <section id="showcase" class="py-32 px-6 lg:px-8" style="background: rgba(0, 0, 0, 0.3);">
             <div class="max-w-5xl mx-auto">
                 <div class="reveal text-center mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">2-Minute Showcase</h2>
-                    <p class="text-xl text-slate-400">A quick walkthrough of my work, my process, and what I'm passionate about.</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">Cinema</h2>
+                    <p class="text-xl" style="color: var(--text-secondary);">A 2-minute showcase of my journey, process, and impact.</p>
                 </div>
 
                 <div class="reveal video-glow">
@@ -696,26 +804,26 @@
             </div>
         </section>
 
-        <!-- Initiatives Section (Bento Grid) -->
+        <!-- Initiatives Section -->
         <section id="initiatives" class="py-32 px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">Initiatives</h2>
-                    <p class="text-xl text-slate-400">Leading organizations to make a tangible impact in education and technology.</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">The Big Three</h2>
+                    <p class="text-xl" style="color: var(--text-secondary);">Leading organizations to create tangible impact in education and technology.</p>
                 </div>
 
                 <div class="bento-grid">
-                    <!-- DECA -->
+                    <!-- John Champe DECA -->
                     <div class="bento-item glass-card spotlight-card rounded-2xl overflow-hidden reveal">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG"
                              alt="John Champe DECA"
                              class="w-full h-64 object-cover">
                         <div class="p-8">
-                            <h3 class="text-3xl font-bold font-display text-white mb-4">John Champe DECA</h3>
-                            <p class="text-slate-300 mb-6 leading-relaxed">
-                                As Chapter President, I spearheaded 289% membership growth, making us the 2nd largest chapter in Virginia.
-                                I manage a team of 10+ officers, lead community service initiatives, and am currently developing "FORGE,"
-                                a platform to automate operations for our 198:1 student-to-advisor ratio.
+                            <h3 class="text-3xl font-bold font-display mb-4" style="color: var(--text-primary);">John Champe DECA</h3>
+                            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
+                                Chapter President of the 2nd largest chapter in Virginia (530+ members). Spearheaded 289% membership growth.
+                                Managing 10+ officers and currently developing "FORGE" automation platform for 198:1 student-to-advisor ratio.
+                                2x ICDC Award of Excellence, Top 5 State Finalist.
                             </p>
 
                             <div class="grid grid-cols-3 gap-4 mb-6">
@@ -733,7 +841,7 @@
                                 </div>
                             </div>
 
-                            <a href="https://www.instagram.com/champedeca" target="_blank" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-semibold">
+                            <a href="https://www.instagram.com/champedeca" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-indigo);">
                                 View Instagram <i class="ph ph-arrow-right"></i>
                             </a>
                         </div>
@@ -745,11 +853,10 @@
                              alt="Mini Makers"
                              class="w-full h-64 object-cover">
                         <div class="p-8">
-                            <h3 class="text-3xl font-bold font-display text-white mb-4">Mini Makers</h3>
-                            <p class="text-slate-300 mb-6 leading-relaxed">
-                                As Co-Founder & Co-CEO of this $8k+ revenue initiative, I developed an affordable (&lt;$20/hr) curriculum
-                                to make tech education accessible. We've taught 400+ students 8+ languages, hosted bootcamps for 350+,
-                                and donated over $2k to charity, including funding 600+ eye care treatments via the Sudeekshan Service Recognition Award.
+                            <h3 class="text-3xl font-bold font-display mb-4" style="color: var(--text-primary);">Mini Makers</h3>
+                            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
+                                Co-Founder & Co-CEO of EdTech non-profit ($8k+ revenue). Taught 400+ students, 35k+ online views.
+                                Donated $2k+ to charity (funded 600+ eye treatments). Recipient of Sudeekshan Service Recognition Award.
                             </p>
 
                             <div class="grid grid-cols-3 gap-4 mb-6">
@@ -767,7 +874,7 @@
                                 </div>
                             </div>
 
-                            <a href="https://minimakers.site" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
+                            <a href="https://minimakers.site" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-cyan);">
                                 Visit Website <i class="ph ph-arrow-right"></i>
                             </a>
                         </div>
@@ -779,11 +886,10 @@
                              alt="Cognicade Studios"
                              class="w-full h-64 object-cover">
                         <div class="p-8">
-                            <h3 class="text-3xl font-bold font-display text-white mb-4">Cognicade Studios</h3>
-                            <p class="text-slate-300 mb-6 leading-relaxed">
-                                As Co-Founder and Creative Director, I created "serious games" to bridge the engagement gap in education.
-                                We've developed 5+ games, won $2000+ in hackathons, and presented our work to over 90 students in-person.
-                                Currently working with Loudoun County Public Schools administration to incorporate serious games into elementary school curricula.
+                            <h3 class="text-3xl font-bold font-display mb-4" style="color: var(--text-primary);">Cognicade Studios</h3>
+                            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
+                                Co-Founder & Creative Director. Lead Developer for "serious games" in education. 10k+ plays, 5+ games, $1.5k+ in prizes.
+                                Working with Loudoun Education Foundation to propose curriculum integration.
                             </p>
 
                             <div class="grid grid-cols-3 gap-4 mb-6">
@@ -792,16 +898,16 @@
                                     <div class="stat-label">Plays</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number">90+</div>
-                                    <div class="stat-label">Students</div>
+                                    <div class="stat-number">5+</div>
+                                    <div class="stat-label">Games</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number">$2.2k+</div>
+                                    <div class="stat-number">$1.5k+</div>
                                     <div class="stat-label">Prizes</div>
                                 </div>
                             </div>
 
-                            <a href="https://cognicade.org" target="_blank" class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold">
+                            <a href="https://cognicade.org" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-purple);">
                                 Visit Website <i class="ph ph-arrow-right"></i>
                             </a>
                         </div>
@@ -811,11 +917,11 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-32 px-6 lg:px-8 bg-black/20">
+        <section id="projects" class="py-32 px-6 lg:px-8" style="background: rgba(0, 0, 0, 0.2);">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">Projects</h2>
-                    <p class="text-xl text-slate-400">Hands-on applications of my skills in software development, AI, and game design.</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">The Work</h2>
+                    <p class="text-xl" style="color: var(--text-secondary);">Hands-on applications in software development, AI, and game design.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -825,16 +931,27 @@
                             <img src="https://i.imgur.com/57DrV8u.png" alt="DECA Forge" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">DECA Forge</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A comprehensive management platform to automate operations for my 530-member DECA chapter.
-                                Built to handle event registration, track member participation, and streamline communication,
-                                solving our 198:1 student-to-advisor bottleneck.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">DECA Forge</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Web platform to automate chapter operations for 530+ member DECA chapter.
                             </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tech-tag">Web Dev</span>
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">React</span>
-                                <span class="tech-tag">Automation</span>
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">Web Dev</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('forge')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-forge"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-forge">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Problem:</strong> 198:1 student-to-advisor ratio made manual operations impossible.</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Solution:</strong> Built comprehensive automation platform for event registration, member tracking, and communication.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> React, Next.js, Tailwind CSS, Firebase</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -845,15 +962,27 @@
                             <img src="https://i.imgur.com/UXuNm2e.png" alt="The FACTory" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">The FACTory</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                An educational game on media literacy co-developed during my internship at the Virginia Serious Games Institute.
-                                Teaches students to identify misinformation and is currently deployed in local elementary schools.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">The FACTory</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Media literacy game (ASSIP Research). Published abstract.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Unity</span>
                                 <span class="tech-tag">C#</span>
                                 <span class="tech-tag">Research</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('factory')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-factory"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-factory">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Role:</strong> Research Intern at Virginia Serious Games Institute</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Impact:</strong> Deployed in local elementary schools. Published abstract presented at 2 university symposia.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Game Design, Educational Psychology</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -864,15 +993,27 @@
                             <img src="https://i.imgur.com/oAkEo30.png" alt="EcoSpark" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">EcoSpark</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A "serious game" from Cognicade Studios that teaches financial literacy and environmental sustainability.
-                                Players manage a budget while making eco-conscious choices in a closed-feedback loop.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">EcoSpark</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Environmental/Financial literacy game teaching sustainability.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Unity</span>
                                 <span class="tech-tag">Game Dev</span>
                                 <span class="tech-tag">EdTech</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('ecospark')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-ecospark"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-ecospark">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Concept:</strong> Players manage budget while making eco-conscious choices in closed-feedback loop.</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Learning Goals:</strong> Financial literacy + Environmental sustainability interconnectedness.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Serious Games Design</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -883,15 +1024,27 @@
                             <img src="https://i.imgur.com/meXg7fG.png" alt="The Rookie" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">The Rookie</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A first-person spy platformer inspired by Karlson and Portal. Features grappling, hacking,
-                                and energy blasting mechanics with a narrative twist. Deep dive into complex physics and narrative design.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">The Rookie</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                FPS Spy Platformer with physics-based mechanics.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Unity</span>
                                 <span class="tech-tag">C#</span>
                                 <span class="tech-tag">Physics</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('rookie')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-rookie"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-rookie">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Inspiration:</strong> Karlson and Portal mechanics</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Features:</strong> Grappling, hacking, energy blasting. Narrative twist: entire game is simulation test to escape.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Advanced Physics, Narrative Design</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -902,15 +1055,27 @@
                             <img src="https://i.imgur.com/Or5lDHs.png" alt="Grading Hat" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">Grading Hat</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                An intelligent grading system using AI to assist educators. Provides consistent evaluation standards,
-                                integrates into existing workflows, and offers automated feedback generation to save time and reduce bias.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">Grading Hat</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                AI-powered grading assistant for teachers.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">AI/ML</span>
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">EdTech</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('grading')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-grading"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-grading">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Purpose:</strong> Reduce teacher workload and grading bias</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Features:</strong> Consistent evaluation standards, automated feedback generation, workflow integration.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Python, Machine Learning, Natural Language Processing</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -921,15 +1086,27 @@
                             <img src="https://i.imgur.com/E2O37vK.png" alt="Christmas Chaos" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">Christmas Chaos</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A fast-paced, top-down arcade shooter where you play as Santa Claus.
-                                Protect the Golden Present from an incoming horde using bow, arrow, and sword.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">Christmas Chaos</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Top-down arcade survival shooter.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Unity</span>
                                 <span class="tech-tag">C#</span>
                                 <span class="tech-tag">Arcade</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('chaos')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-chaos"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-chaos">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Concept:</strong> Play as Santa Claus defending the Golden Present</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Mechanics:</strong> Fast-paced survival format with bow, arrow, and sword combat.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Arcade Game Design</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -940,15 +1117,27 @@
                             <img src="https://i.imgur.com/8sp70jI.png" alt="Moneytree Simulator" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">Moneytree Simulator</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A financial simulation where you're placed in the shoes of a random person.
-                                Make the best investment and money allocation choices while preparing for random life events.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">Moneytree Simulator</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Financial decision-making simulation game.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Simulation</span>
                                 <span class="tech-tag">Finance</span>
                                 <span class="tech-tag">Game Dev</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('moneytree')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-moneytree"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-moneytree">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Concept:</strong> Players placed in random person's shoes making financial decisions</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Gameplay:</strong> Investment choices, money allocation, prepare for random life events.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Financial Modeling</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -959,15 +1148,27 @@
                             <img src="https://i.imgur.com/EFCaGl3.png" alt="Plundr.io" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">Plundr.io</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A concept for a web-based, multiplayer .io game with a pirate theme.
-                                Features real-time networking, authoritative server logic, and scalable 2D graphics for browser-based play.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">Plundr.io</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Multiplayer pirate .io game concept.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Multiplayer</span>
                                 <span class="tech-tag">Web</span>
                                 <span class="tech-tag">IO Game</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('plundr')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-plundr"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-plundr">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Concept:</strong> Web-based multiplayer pirate-themed .io game</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Technical Focus:</strong> Real-time networking, authoritative server logic, scalable 2D browser graphics.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> JavaScript, WebSockets, Node.js, Canvas API</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -978,15 +1179,27 @@
                             <img src="https://i.imgur.com/3g9XuDG.png" alt="Bread to Dough" class="project-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold font-display text-white mb-3">Bread to Dough</h3>
-                            <p class="text-slate-300 mb-4 leading-relaxed">
-                                A mobile game concept focused on running a bakery.
-                                Features resource management, customer orders, and business expansion. Mobile-first UX exercise.
+                            <h3 class="text-2xl font-bold font-display mb-3" style="color: var(--text-primary);">Bread to Dough</h3>
+                            <p class="mb-4 leading-relaxed" style="color: var(--text-secondary);">
+                                Mobile bakery management simulation.
                             </p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="tech-tag">Mobile</span>
                                 <span class="tech-tag">Unity</span>
                                 <span class="tech-tag">Business Sim</span>
+                            </div>
+
+                            <button class="expander-btn" onclick="toggleExpander('bread')">
+                                <span>View Details</span>
+                                <i class="ph ph-caret-down expander-icon" id="icon-bread"></i>
+                            </button>
+
+                            <div class="expander-content" id="content-bread">
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Concept:</strong> Run a bakery business on mobile</p>
+                                    <p class="mb-3" style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Core Loop:</strong> Resource management, customer orders, business expansion.</p>
+                                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Tech Stack:</strong> Unity, C#, Mobile-First UX Design</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -994,12 +1207,71 @@
             </div>
         </section>
 
-        <!-- Experience Section (Timeline) -->
+        <!-- Awards Ticker -->
+        <section class="py-16 px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="awards-ticker">
+                    <div class="ticker-content">
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>National Merit Commended Scholar</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>AP Scholar with Distinction</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>Summa Cum Laude (Top 5%)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>AcademiesHacks Winner (1st Place)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>PhoenixHacks Winner (1st Place)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>CTE Department Award</span>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>National Merit Commended Scholar</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>AP Scholar with Distinction</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>Summa Cum Laude (Top 5%)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>AcademiesHacks Winner (1st Place)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>PhoenixHacks Winner (1st Place)</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>CTE Department Award</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
         <section id="experience" class="py-32 px-6 lg:px-8">
             <div class="max-w-5xl mx-auto">
                 <div class="reveal mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">Experience</h2>
-                    <p class="text-xl text-slate-400">Professional and leadership roles in research, web development, and education.</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">Experience</h2>
+                    <p class="text-xl" style="color: var(--text-secondary);">Professional and leadership roles in research, web development, and education.</p>
                 </div>
 
                 <div class="relative pl-12">
@@ -1008,80 +1280,74 @@
                     </div>
 
                     <div class="space-y-12">
-                        <!-- ASSIP -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Research Intern (ASSIP)</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">George Mason University, Virginia Serious Games Institute</p>
-                                <p class="text-slate-300 leading-relaxed">
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Research Intern (ASSIP)</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">George Mason University, Virginia Serious Games Institute</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
                                     Co-developed educational games on media literacy ("The FACTory") and environmental planning ("Carbon City").
-                                    Published abstracts and presented at two university symposia.
+                                    Published 2 abstracts and presented at university symposia.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- KWF -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Game Development Team Lead</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">Kashmir World Foundation (501c3)</p>
-                                <p class="text-slate-300 leading-relaxed">
-                                    Led a 4-person team of developers and artists to create an educational wildlife game.
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Game Development Team Lead</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">Kashmir World Foundation (501c3)</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
+                                    Led 4-person team of developers and artists to create educational wildlife game.
                                     Designed project timelines, coordinated weekly progress, and coded core gameplay features.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Up Integrated -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Web Development Project Lead</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">Up Integrated Inc. (Federal Contracting Firm)</p>
-                                <p class="text-slate-300 leading-relaxed">
-                                    Guided a 4-person team in the design, development, and launch of the company's first website,
-                                    translating the founder's vision into a live product.
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Web Development Project Lead</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">Up Integrated Inc. (Federal Contracting Firm)</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
+                                    Guided 4-person team in design, development, and launch of company's first website,
+                                    translating founder's vision into live product.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Evergent -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Data Management Platform Intern</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">Evergent Technologies Inc.</p>
-                                <p class="text-slate-300 leading-relaxed">
-                                    Created an internal data managing platform. Delivered a functional prototype for managing company records,
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Data Management Platform Intern</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">Evergent Technologies Inc.</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
+                                    Created internal data managing platform. Delivered functional prototype for managing company records,
                                     earning positive feedback from executives.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Tutoring -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Mathematics Tutor</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">Mathnasium & Freelance</p>
-                                <p class="text-slate-300 leading-relaxed">
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Mathematics Tutor</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">Mathnasium & Freelance</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
                                     Extensive experience simplifying complex math concepts for 15+ students over 50+ hours,
-                                    both as a freelance tutor and at Mathnasium.
+                                    both as freelance tutor and at Mathnasium.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Ashby Ponds -->
                         <div class="relative reveal">
                             <div class="timeline-dot"></div>
                             <div class="glass-card rounded-2xl p-8">
-                                <h3 class="text-2xl font-bold font-display text-white mb-2">Student Server</h3>
-                                <p class="text-indigo-400 font-semibold mb-4">Windows Restaurant at Ashby Ponds</p>
-                                <p class="text-slate-300 leading-relaxed">
-                                    Managed service logistics for a 4-6 table section in a 100+ guest dining room.
-                                    Coordinated with culinary staff to ensure order accuracy & timing in a fast-paced environment.
+                                <h3 class="text-2xl font-bold font-display mb-2" style="color: var(--text-primary);">Student Server</h3>
+                                <p class="font-semibold mb-4" style="color: var(--accent-indigo);">Windows Restaurant at Ashby Ponds</p>
+                                <p class="leading-relaxed" style="color: var(--text-secondary);">
+                                    Managed service logistics for 4-6 table section in 100+ guest dining room.
+                                    Coordinated with culinary staff to ensure order accuracy & timing in fast-paced environment.
                                 </p>
                             </div>
                         </div>
@@ -1091,56 +1357,53 @@
         </section>
 
         <!-- Research Section -->
-        <section id="research" class="py-32 px-6 lg:px-8 bg-black/20">
+        <section id="research" class="py-32 px-6 lg:px-8" style="background: rgba(0, 0, 0, 0.2);">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal mb-16">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">Research & Publications</h2>
-                    <p class="text-xl text-slate-400">Formal research contributions in AI and serious game development.</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">Research & Publications</h2>
+                    <p class="text-xl" style="color: var(--text-secondary);">Formal research contributions in AI and serious game development.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Emergence AI -->
                     <div class="glass-card spotlight-card rounded-2xl p-8 reveal">
                         <div class="mb-4">
-                            <i class="ph ph-file-text text-5xl text-indigo-400"></i>
+                            <i class="ph ph-file-text text-5xl" style="color: var(--accent-indigo);"></i>
                         </div>
-                        <h3 class="text-2xl font-bold font-display text-white mb-4">Emergence AI Reinforcement Learning Paper</h3>
-                        <p class="text-slate-300 mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold font-display mb-4" style="color: var(--text-primary);">Emergence AI Reinforcement Learning Paper</h3>
+                        <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
                             6-month independent study training AI models in custom Unity environments.
                             Found decision frequency hyperparameter critical for stable policies.
                         </p>
-                        <a href="https://doi.org/10.5281/zenodo.17394027" target="_blank" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-semibold">
+                        <a href="https://doi.org/10.5281/zenodo.17394027" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-indigo);">
                             Read Publication (DOI) <i class="ph ph-arrow-right"></i>
                         </a>
                     </div>
 
-                    <!-- ASSIP Abstracts -->
                     <div class="glass-card spotlight-card rounded-2xl p-8 reveal">
                         <div class="mb-4">
-                            <i class="ph ph-files text-5xl text-cyan-400"></i>
+                            <i class="ph ph-files text-5xl" style="color: var(--accent-cyan);"></i>
                         </div>
-                        <h3 class="text-2xl font-bold font-display text-white mb-4">ASSIP Research Abstracts (VSGI)</h3>
-                        <p class="text-slate-300 mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold font-display mb-4" style="color: var(--text-primary);">ASSIP Research Abstracts (VSGI)</h3>
+                        <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
                             Published abstracts for "The FACTory" (media literacy) and "Carbon City" (environmental planning)
-                            in the ASSIP student research journal.
+                            in ASSIP student research journal.
                         </p>
                         <div class="flex flex-col gap-3">
-                            <a href="https://doi.org/10.13021/jssr2025.5271" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
+                            <a href="https://doi.org/10.13021/jssr2025.5271" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-cyan);">
                                 "The FACTory" Abstract <i class="ph ph-arrow-right"></i>
                             </a>
-                            <a href="https://doi.org/10.13021/jssr2025.5270" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
+                            <a href="https://doi.org/10.13021/jssr2025.5270" target="_blank" class="inline-flex items-center gap-2 font-semibold" style="color: var(--accent-cyan);">
                                 "Carbon City" Abstract <i class="ph ph-arrow-right"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- NeuroQuest -->
                     <div class="glass-card spotlight-card rounded-2xl p-8 reveal md:col-span-2">
                         <div class="mb-4">
-                            <i class="ph ph-brain text-5xl text-purple-400"></i>
+                            <i class="ph ph-brain text-5xl" style="color: var(--accent-purple);"></i>
                         </div>
-                        <h3 class="text-2xl font-bold font-display text-white mb-4">NeuroQuest</h3>
-                        <p class="text-slate-300 mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold font-display mb-4" style="color: var(--text-primary);">NeuroQuest</h3>
+                        <p class="mb-6 leading-relaxed" style="color: var(--text-secondary);">
                             Research project (35+ hours) developing and testing game-based brain therapy applications
                             for patients with neurodegenerative diseases.
                         </p>
@@ -1155,11 +1418,11 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-20 px-6 lg:px-8 border-t border-slate-800">
+        <footer class="py-20 px-6 lg:px-8" style="border-top: 1px solid var(--border-color);">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-5xl lg:text-6xl font-bold font-display text-white mb-6">Let's Connect</h2>
-                    <p class="text-xl text-slate-400 mb-8">Interested in collaborating or learning more about my work?</p>
+                    <h2 class="text-5xl lg:text-6xl font-bold font-display mb-6" style="color: var(--text-primary);">Let's Connect</h2>
+                    <p class="text-xl mb-8" style="color: var(--text-secondary);">Interested in collaborating or learning more about my work?</p>
 
                     <div class="flex justify-center gap-6 mb-12">
                         <a href="mailto:ashuyaramada@gmail.com" class="social-icon" aria-label="Email">
@@ -1174,7 +1437,7 @@
                     </div>
                 </div>
 
-                <div class="text-center text-slate-500">
+                <div class="text-center" style="color: var(--text-secondary);">
                     <p>&copy; 2025 Ashmith Yaramada. All rights reserved.</p>
                 </div>
             </div>
@@ -1182,6 +1445,193 @@
     </main>
 
     <script>
+        // ==========================================
+        // THEME TOGGLE
+        // ==========================================
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+
+            // Update Three.js scene
+            if (window.updateSceneLighting) {
+                window.updateSceneLighting(newTheme);
+            }
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'ph ph-moon text-sm';
+            } else {
+                icon.className = 'ph ph-sun text-sm';
+            }
+        }
+
+        // ==========================================
+        // THREE.JS 3D GAME BOY
+        // ==========================================
+        let scene, camera, renderer, gameBoy, mouse, targetRotationX = 0, targetRotationY = 0;
+
+        function initThreeJS() {
+            const canvas = document.getElementById('gameboy-canvas');
+            const container = canvas.parentElement;
+
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(500, 500);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Create Game Boy
+            createGameBoy();
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0x6366f1, 1, 100);
+            pointLight1.position.set(5, 5, 5);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0x06b6d4, 1, 100);
+            pointLight2.position.set(-5, -5, 5);
+            scene.add(pointLight2);
+
+            // Mouse interaction
+            mouse = { x: 0, y: 0 };
+            canvas.addEventListener('mousemove', onMouseMove);
+
+            // Animation loop
+            animate();
+
+            // Responsive
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function createGameBoy() {
+            gameBoy = new THREE.Group();
+
+            const currentTheme = html.getAttribute('data-theme');
+            const bodyColor = currentTheme === 'dark' ? 0x9333ea : 0x6366f1;
+
+            // Main body
+            const bodyGeometry = new THREE.BoxGeometry(2, 3, 0.5);
+            const bodyMaterial = new THREE.MeshPhongMaterial({ color: bodyColor, shininess: 100 });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            gameBoy.add(body);
+
+            // Screen
+            const screenGeometry = new THREE.BoxGeometry(1.6, 1.2, 0.05);
+            const screenMaterial = new THREE.MeshPhongMaterial({ color: 0x1a1a2e, emissive: 0x06b6d4, emissiveIntensity: 0.5 });
+            const screen = new THREE.Mesh(screenGeometry, screenMaterial);
+            screen.position.set(0, 0.6, 0.26);
+            gameBoy.add(screen);
+
+            // D-Pad
+            const dpadGroup = new THREE.Group();
+            const dpadMaterial = new THREE.MeshPhongMaterial({ color: 0x2a2a3e });
+
+            // Horizontal bar
+            const hBarGeometry = new THREE.BoxGeometry(0.5, 0.15, 0.05);
+            const hBar = new THREE.Mesh(hBarGeometry, dpadMaterial);
+            dpadGroup.add(hBar);
+
+            // Vertical bar
+            const vBarGeometry = new THREE.BoxGeometry(0.15, 0.5, 0.05);
+            const vBar = new THREE.Mesh(vBarGeometry, dpadMaterial);
+            dpadGroup.add(vBar);
+
+            dpadGroup.position.set(-0.5, -0.5, 0.26);
+            gameBoy.add(dpadGroup);
+
+            // Buttons (A & B)
+            const buttonGeometry = new THREE.CylinderGeometry(0.15, 0.15, 0.05, 32);
+            const buttonMaterial = new THREE.MeshPhongMaterial({ color: 0xff6b6b });
+
+            const buttonA = new THREE.Mesh(buttonGeometry, buttonMaterial);
+            buttonA.rotation.x = Math.PI / 2;
+            buttonA.position.set(0.6, -0.5, 0.26);
+            gameBoy.add(buttonA);
+
+            const buttonB = new THREE.Mesh(buttonGeometry, buttonMaterial);
+            buttonB.rotation.x = Math.PI / 2;
+            buttonB.position.set(0.3, -0.7, 0.26);
+            gameBoy.add(buttonB);
+
+            // Start/Select buttons
+            const smallButtonGeometry = new THREE.BoxGeometry(0.3, 0.08, 0.05);
+            const smallButtonMaterial = new THREE.MeshPhongMaterial({ color: 0x2a2a3e });
+
+            const startButton = new THREE.Mesh(smallButtonGeometry, smallButtonMaterial);
+            startButton.position.set(0.2, -1.1, 0.26);
+            gameBoy.add(startButton);
+
+            const selectButton = new THREE.Mesh(smallButtonGeometry, smallButtonMaterial);
+            selectButton.position.set(-0.2, -1.1, 0.26);
+            gameBoy.add(selectButton);
+
+            // Add to scene
+            scene.add(gameBoy);
+        }
+
+        function onMouseMove(event) {
+            const rect = event.target.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            targetRotationY = mouse.x * 0.5;
+            targetRotationX = mouse.y * 0.5;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (gameBoy) {
+                // Smooth rotation
+                gameBoy.rotation.y += (targetRotationY - gameBoy.rotation.y) * 0.05;
+                gameBoy.rotation.x += (targetRotationX - gameBoy.rotation.x) * 0.05;
+
+                // Auto-rotation
+                gameBoy.rotation.y += 0.003;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            const canvas = document.getElementById('gameboy-canvas');
+            const size = window.innerWidth < 768 ? 300 : 500;
+
+            camera.aspect = 1;
+            camera.updateProjectionMatrix();
+            renderer.setSize(size, size);
+        }
+
+        window.updateSceneLighting = function(theme) {
+            if (gameBoy && gameBoy.children[0]) {
+                const bodyColor = theme === 'dark' ? 0x9333ea : 0x6366f1;
+                gameBoy.children[0].material.color.setHex(bodyColor);
+            }
+        };
+
         // ==========================================
         // PRELOADER
         // ==========================================
@@ -1201,7 +1651,6 @@
                 if (progress >= 100) {
                     clearInterval(interval);
 
-                    // Curtain reveal effect
                     gsap.to(preloader, {
                         yPercent: -100,
                         duration: 1.2,
@@ -1209,6 +1658,7 @@
                         onComplete: () => {
                             preloader.style.display = 'none';
                             initAnimations();
+                            initThreeJS();
                         }
                     });
                 }
@@ -1232,7 +1682,6 @@
 
         requestAnimationFrame(raf);
 
-        // Anchor link smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1240,7 +1689,6 @@
                 if (target) {
                     lenis.scrollTo(target, { offset: -80 });
 
-                    // Close mobile menu if open
                     const mobileMenu = document.getElementById('mobile-menu');
                     if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
@@ -1258,6 +1706,17 @@
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+
+        // ==========================================
+        // EXPANDER FUNCTIONALITY
+        // ==========================================
+        function toggleExpander(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
 
         // ==========================================
         // MAGNETIC BUTTONS
@@ -1336,12 +1795,9 @@
 
             // Reveal elements on scroll
             const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach((element, index) => {
+            reveals.forEach((element) => {
                 gsap.fromTo(element,
-                    {
-                        opacity: 0,
-                        y: 60
-                    },
+                    { opacity: 0, y: 60 },
                     {
                         opacity: 1,
                         y: 0,
@@ -1387,25 +1843,13 @@
                 });
             }
 
-            // Navbar background on scroll
-            const nav = document.querySelector('.glass-nav');
-            ScrollTrigger.create({
-                start: 'top -80',
-                end: 99999,
-                toggleClass: {
-                    targets: nav,
-                    className: 'nav-scrolled'
-                }
-            });
-
-            // Refresh ScrollTrigger on window resize
             window.addEventListener('resize', () => {
                 ScrollTrigger.refresh();
             });
         }
 
         // ==========================================
-        // SOCIAL ICON MAGNETIC EFFECT
+        // SOCIAL ICON EFFECTS
         // ==========================================
         const socialIcons = document.querySelectorAll('.social-icon');
 
