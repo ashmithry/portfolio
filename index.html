@@ -429,33 +429,11 @@
             z-index: 10;
         }
 
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .bento-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, auto);
-            }
-
-            .bento-item:nth-child(1) {
-                grid-column: 1 / 3;
-                grid-row: 1 / 2;
-            }
-
-            .bento-item:nth-child(2) {
-                grid-column: 3 / 4;
-                grid-row: 1 / 3;
-            }
-
-            .bento-item:nth-child(3) {
-                grid-column: 1 / 3;
-                grid-row: 2 / 3;
-            }
+        /* Initiatives Grid */
+        .initiatives-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         /* Video Glow */
@@ -725,9 +703,9 @@
                     <!-- Text Content -->
                     <div class="order-2 lg:order-1">
                         <div class="reveal">
-                            <h1 class="text-6xl lg:text-7xl font-bold font-display mb-6 leading-tight">
-                                <span class="block hero-text" style="color: var(--text-primary);">Innovator.</span>
-                                <span class="block hero-text" style="color: var(--text-primary);">Leader.</span>
+                            <h1 class="text-6xl lg:text-7xl font-bold font-display mb-6 leading-none">
+                                <span class="block hero-text mb-2" style="color: var(--text-primary);">Innovator.</span>
+                                <span class="block hero-text mb-2" style="color: var(--text-primary);">Leader.</span>
                                 <span class="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent hero-text">Developer.</span>
                             </h1>
                         </div>
@@ -812,9 +790,9 @@
                     <p class="text-xl" style="color: var(--text-secondary);">Leading organizations to create tangible impact in education and technology.</p>
                 </div>
 
-                <div class="bento-grid">
+                <div class="initiatives-grid">
                     <!-- John Champe DECA -->
-                    <div class="bento-item glass-card spotlight-card rounded-2xl overflow-hidden reveal">
+                    <div class="glass-card spotlight-card rounded-2xl overflow-hidden reveal">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG"
                              alt="John Champe DECA"
                              class="w-full h-64 object-cover">
@@ -848,7 +826,7 @@
                     </div>
 
                     <!-- Mini Makers -->
-                    <div class="bento-item glass-card spotlight-card rounded-2xl overflow-hidden reveal">
+                    <div class="glass-card spotlight-card rounded-2xl overflow-hidden reveal">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg"
                              alt="Mini Makers"
                              class="w-full h-64 object-cover">
@@ -881,7 +859,7 @@
                     </div>
 
                     <!-- Cognicade Studios -->
-                    <div class="bento-item glass-card spotlight-card rounded-2xl overflow-hidden reveal">
+                    <div class="glass-card spotlight-card rounded-2xl overflow-hidden reveal">
                         <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg"
                              alt="Cognicade Studios"
                              class="w-full h-64 object-cover">
@@ -1214,15 +1192,11 @@
                     <div class="ticker-content">
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>National Merit Commended Scholar</span>
+                            <span>DECA ICDC Award of Excellence (2x)</span>
                         </div>
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>AP Scholar with Distinction</span>
-                        </div>
-                        <div class="ticker-item">
-                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>Summa Cum Laude (Top 5%)</span>
+                            <span>DECA Top 5 State Finalist</span>
                         </div>
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
@@ -1235,19 +1209,19 @@
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
                             <span>CTE Department Award</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>Sudeekshan Service Recognition Award</span>
                         </div>
                         <!-- Duplicate for seamless loop -->
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>National Merit Commended Scholar</span>
+                            <span>DECA ICDC Award of Excellence (2x)</span>
                         </div>
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>AP Scholar with Distinction</span>
-                        </div>
-                        <div class="ticker-item">
-                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
-                            <span>Summa Cum Laude (Top 5%)</span>
+                            <span>DECA Top 5 State Finalist</span>
                         </div>
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
@@ -1260,6 +1234,10 @@
                         <div class="ticker-item">
                             <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
                             <span>CTE Department Award</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="ph-fill ph-trophy ticker-icon text-2xl"></i>
+                            <span>Sudeekshan Service Recognition Award</span>
                         </div>
                     </div>
                 </div>
@@ -1530,63 +1508,69 @@
             gameBoy = new THREE.Group();
 
             const currentTheme = html.getAttribute('data-theme');
-            const bodyColor = currentTheme === 'dark' ? 0x9333ea : 0x6366f1;
+            const wireColor = currentTheme === 'dark' ? 0x6366f1 : 0x4f46e5;
 
-            // Main body
+            // Wireframe material
+            const wireMaterial = new THREE.LineBasicMaterial({ color: wireColor, linewidth: 2 });
+
+            // Main body (wireframe)
             const bodyGeometry = new THREE.BoxGeometry(2, 3, 0.5);
-            const bodyMaterial = new THREE.MeshPhongMaterial({ color: bodyColor, shininess: 100 });
-            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-            gameBoy.add(body);
+            const bodyEdges = new THREE.EdgesGeometry(bodyGeometry);
+            const bodyWireframe = new THREE.LineSegments(bodyEdges, wireMaterial);
+            gameBoy.add(bodyWireframe);
 
-            // Screen
+            // Screen (wireframe)
             const screenGeometry = new THREE.BoxGeometry(1.6, 1.2, 0.05);
-            const screenMaterial = new THREE.MeshPhongMaterial({ color: 0x1a1a2e, emissive: 0x06b6d4, emissiveIntensity: 0.5 });
-            const screen = new THREE.Mesh(screenGeometry, screenMaterial);
-            screen.position.set(0, 0.6, 0.26);
-            gameBoy.add(screen);
+            const screenEdges = new THREE.EdgesGeometry(screenGeometry);
+            const screenWireframe = new THREE.LineSegments(screenEdges, wireMaterial);
+            screenWireframe.position.set(0, 0.6, 0.26);
+            gameBoy.add(screenWireframe);
 
-            // D-Pad
+            // D-Pad (wireframe cross)
             const dpadGroup = new THREE.Group();
-            const dpadMaterial = new THREE.MeshPhongMaterial({ color: 0x2a2a3e });
 
             // Horizontal bar
             const hBarGeometry = new THREE.BoxGeometry(0.5, 0.15, 0.05);
-            const hBar = new THREE.Mesh(hBarGeometry, dpadMaterial);
-            dpadGroup.add(hBar);
+            const hBarEdges = new THREE.EdgesGeometry(hBarGeometry);
+            const hBarWireframe = new THREE.LineSegments(hBarEdges, wireMaterial);
+            dpadGroup.add(hBarWireframe);
 
             // Vertical bar
             const vBarGeometry = new THREE.BoxGeometry(0.15, 0.5, 0.05);
-            const vBar = new THREE.Mesh(vBarGeometry, dpadMaterial);
-            dpadGroup.add(vBar);
+            const vBarEdges = new THREE.EdgesGeometry(vBarGeometry);
+            const vBarWireframe = new THREE.LineSegments(vBarEdges, wireMaterial);
+            dpadGroup.add(vBarWireframe);
 
             dpadGroup.position.set(-0.5, -0.5, 0.26);
             gameBoy.add(dpadGroup);
 
-            // Buttons (A & B)
-            const buttonGeometry = new THREE.CylinderGeometry(0.15, 0.15, 0.05, 32);
-            const buttonMaterial = new THREE.MeshPhongMaterial({ color: 0xff6b6b });
+            // Buttons (A & B) - wireframe circles
+            const buttonGeometry = new THREE.CylinderGeometry(0.15, 0.15, 0.05, 16);
 
-            const buttonA = new THREE.Mesh(buttonGeometry, buttonMaterial);
-            buttonA.rotation.x = Math.PI / 2;
-            buttonA.position.set(0.6, -0.5, 0.26);
-            gameBoy.add(buttonA);
+            const buttonAEdges = new THREE.EdgesGeometry(buttonGeometry);
+            const buttonAWireframe = new THREE.LineSegments(buttonAEdges, wireMaterial);
+            buttonAWireframe.rotation.x = Math.PI / 2;
+            buttonAWireframe.position.set(0.6, -0.5, 0.26);
+            gameBoy.add(buttonAWireframe);
 
-            const buttonB = new THREE.Mesh(buttonGeometry, buttonMaterial);
-            buttonB.rotation.x = Math.PI / 2;
-            buttonB.position.set(0.3, -0.7, 0.26);
-            gameBoy.add(buttonB);
+            const buttonBEdges = new THREE.EdgesGeometry(buttonGeometry);
+            const buttonBWireframe = new THREE.LineSegments(buttonBEdges, wireMaterial);
+            buttonBWireframe.rotation.x = Math.PI / 2;
+            buttonBWireframe.position.set(0.3, -0.7, 0.26);
+            gameBoy.add(buttonBWireframe);
 
             // Start/Select buttons
             const smallButtonGeometry = new THREE.BoxGeometry(0.3, 0.08, 0.05);
-            const smallButtonMaterial = new THREE.MeshPhongMaterial({ color: 0x2a2a3e });
 
-            const startButton = new THREE.Mesh(smallButtonGeometry, smallButtonMaterial);
-            startButton.position.set(0.2, -1.1, 0.26);
-            gameBoy.add(startButton);
+            const startEdges = new THREE.EdgesGeometry(smallButtonGeometry);
+            const startWireframe = new THREE.LineSegments(startEdges, wireMaterial);
+            startWireframe.position.set(0.2, -1.1, 0.26);
+            gameBoy.add(startWireframe);
 
-            const selectButton = new THREE.Mesh(smallButtonGeometry, smallButtonMaterial);
-            selectButton.position.set(-0.2, -1.1, 0.26);
-            gameBoy.add(selectButton);
+            const selectEdges = new THREE.EdgesGeometry(smallButtonGeometry);
+            const selectWireframe = new THREE.LineSegments(selectEdges, wireMaterial);
+            selectWireframe.position.set(-0.2, -1.1, 0.26);
+            gameBoy.add(selectWireframe);
 
             // Add to scene
             scene.add(gameBoy);
@@ -1626,9 +1610,20 @@
         }
 
         window.updateSceneLighting = function(theme) {
-            if (gameBoy && gameBoy.children[0]) {
-                const bodyColor = theme === 'dark' ? 0x9333ea : 0x6366f1;
-                gameBoy.children[0].material.color.setHex(bodyColor);
+            if (gameBoy) {
+                const wireColor = theme === 'dark' ? 0x6366f1 : 0x4f46e5;
+                gameBoy.children.forEach(child => {
+                    if (child.material) {
+                        child.material.color.setHex(wireColor);
+                    }
+                    if (child.children) {
+                        child.children.forEach(subChild => {
+                            if (subChild.material) {
+                                subChild.material.color.setHex(wireColor);
+                            }
+                        });
+                    }
+                });
             }
         };
 
