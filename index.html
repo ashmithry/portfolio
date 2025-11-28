@@ -5,28 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashmith Yaramada - Product & Engineering</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236366f1'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Inter, sans-serif' font-size='50' font-weight='bold' fill='white'>AY</text></svg>">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
-    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
@@ -249,12 +242,10 @@
 </head>
 
 <body>
-    <!-- Theme Toggle -->
     <div class="fixed top-24 right-8 z-50 p-2 bg-slate-900/50 backdrop-blur border border-slate-700 rounded-full cursor-pointer transition-all hover:bg-slate-800" id="theme-toggle">
         <i class="ph ph-moon text-indigo-400"></i>
     </div>
 
-    <!-- Navigation -->
     <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -285,9 +276,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="relative z-10">
-        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-20">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -328,7 +317,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-20 px-6 lg:px-8 section-padding">
             <div class="max-w-5xl mx-auto text-center">
                 <h2 class="text-4xl lg:text-5xl font-bold font-display mb-8 text-white">About Me</h2>
@@ -338,7 +326,6 @@
             </div>
         </section>
 
-        <!-- Showcase Video -->
         <section id="showcase" class="py-20 px-6 lg:px-8 bg-slate-900/30">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
@@ -351,12 +338,10 @@
             </div>
         </section>
 
-        <!-- Initiatives -->
         <section id="initiatives" class="py-32 px-6 lg:px-8 section-padding">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-16 text-white">Strategic Initiatives</h2>
                 <div class="grid grid-cols-1 gap-12">
-                    <!-- DECA -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="DECA">
                         <div class="md:w-2/3">
@@ -370,7 +355,6 @@
                         </div>
                     </div>
                     
-                    <!-- Mini Makers -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row-reverse gap-8 items-center">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="Mini Makers">
                         <div class="md:w-2/3">
@@ -384,7 +368,6 @@
                         </div>
                     </div>
 
-                    <!-- Cognicade -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center">
                         <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="Cognicade">
                         <div class="md:w-2/3">
@@ -401,7 +384,6 @@
             </div>
         </section>
 
-        <!-- Projects Section (Dynamic) -->
         <section id="projects" class="py-32 px-6 lg:px-8 bg-slate-900/30 section-padding">
             <div class="max-w-7xl mx-auto">
                 <div class="mb-16">
@@ -409,24 +391,20 @@
                     <p class="text-xl text-slate-400">Scalable software solutions solving specific business and user problems.</p>
                 </div>
                 <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projects injected via JS -->
-                </div>
+                    </div>
             </div>
         </section>
 
-        <!-- Awards Ticker -->
         <section class="py-16 px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
                 <div class="awards-ticker">
                     <div class="ticker-content">
-                        <!-- Content duplicated for seamless scroll -->
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA ICDC Award of Excellence (2x)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> AcademiesHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> PhoenixHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> CTE Department Award</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> Sudeekshan Service Recognition</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA Top 5 State Finalist</span>
-                        <!-- Duplicate -->
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA ICDC Award of Excellence (2x)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> AcademiesHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> PhoenixHacks Winner (1st Place)</span>
@@ -435,7 +413,6 @@
             </div>
         </section>
 
-        <!-- Experience -->
         <section id="experience" class="py-32 px-6 lg:px-8 section-padding">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-16 text-white">Experience</h2>
@@ -481,7 +458,6 @@
             </div>
         </section>
 
-        <!-- Research -->
         <section id="research" class="py-32 px-6 lg:px-8 bg-slate-900/30 section-padding">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-12 text-white">Research</h2>
@@ -510,7 +486,6 @@
         </footer>
     </main>
 
-    <!-- Project Data Script -->
     <script>
         // ==========================================
         //  PROJECT CONFIGURATION
@@ -626,6 +601,17 @@
         projectData.forEach(project => {
             const card = document.createElement('div');
             card.className = "glass-card rounded-2xl overflow-hidden group flex flex-col";
+            
+            // Logic to conditionally show the button
+            // It checks if link exists AND is not an empty string AND is not just "#"
+            const hasLink = project.link && project.link.trim() !== "" && project.link !== "#";
+            
+            const linkButtonHtml = hasLink ? `
+                <a href="${project.link}" target="_blank" class="mt-auto w-full py-2 rounded-lg border border-slate-700 text-center text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    View Project
+                </a>
+            ` : '';
+
             card.innerHTML = `
                 <div class="project-image-wrapper">
                     <img src="${project.img}" alt="${project.title}" class="project-image">
@@ -649,9 +635,7 @@
                         </div>
                     </div>
 
-                    <a href="${project.link}" target="_blank" class="mt-auto w-full py-2 rounded-lg border border-slate-700 text-center text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
-                        View Project
-                    </a>
+                    ${linkButtonHtml}
                 </div>
             `;
             projectsContainer.appendChild(card);
@@ -667,14 +651,8 @@
         });
 
         // ==========================================
-        //  3D & ANIMATION INIT (Simplified)
+        //  3D & ANIMATION INIT
         // ==========================================
-        // (Keeping existing 3D code logic placeholder for brevity, assume previous Three.js code here)
-        // For full functionality, ensure the previous Three.js script block is preserved or re-added.
-        
-        // RE-ADDING ESSENTIAL THREE.JS CODE FOR THE CANVAS
-        // ... [Previous 3D Code would go here] ...
-        // To ensure the canvas works, I will paste the minimal init code below.
         
         window.addEventListener('load', () => {
              // Basic Scene Setup
