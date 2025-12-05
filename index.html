@@ -5,21 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashmith Yaramada - Product & Engineering</title>
 
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236366f1'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Inter, sans-serif' font-size='50' font-weight='bold' fill='white'>AY</text></svg>">
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
+    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+    <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
@@ -80,6 +87,22 @@
             transform: translateY(-4px);
             box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
         }
+
+        /* Spotlight Card Effect */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.1), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .spotlight-card:hover::before { opacity: 1; }
 
         /* Tech Tags */
         .tech-tag {
@@ -190,27 +213,6 @@
             75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
         }
 
-        /* Timeline */
-        .timeline-line {
-            position: absolute;
-            left: 1.5rem;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: rgba(148, 163, 184, 0.2);
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 0.875rem;
-            top: 0.5rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            background: #6366f1;
-            border-radius: 50%;
-            border: 3px solid #020617;
-            z-index: 10;
-        }
-
         /* Ticker */
         .awards-ticker {
             overflow: hidden;
@@ -242,10 +244,12 @@
 </head>
 
 <body>
+    <!-- Theme Toggle -->
     <div class="fixed top-24 right-8 z-50 p-2 bg-slate-900/50 backdrop-blur border border-slate-700 rounded-full cursor-pointer transition-all hover:bg-slate-800" id="theme-toggle">
         <i class="ph ph-moon text-indigo-400"></i>
     </div>
 
+    <!-- Navigation -->
     <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -256,7 +260,7 @@
                     <a href="#initiatives" class="text-slate-400 hover:text-white font-medium transition-colors">Initiatives</a>
                     <a href="#projects" class="text-slate-400 hover:text-white font-medium transition-colors">Projects</a>
                     <a href="#experience" class="text-slate-400 hover:text-white font-medium transition-colors">Experience</a>
-                    <a href="#research" class="text-slate-400 hover:text-white font-medium transition-colors">Research</a>
+                    <a href="#honors" class="text-slate-400 hover:text-white font-medium transition-colors">Honors</a>
                 </div>
 
                 <button id="mobile-menu-btn" class="md:hidden text-slate-300">
@@ -270,21 +274,29 @@
                     <a href="#initiatives" class="text-slate-400 hover:text-white font-medium">Initiatives</a>
                     <a href="#projects" class="text-slate-400 hover:text-white font-medium">Projects</a>
                     <a href="#experience" class="text-slate-400 hover:text-white font-medium">Experience</a>
-                    <a href="#research" class="text-slate-400 hover:text-white font-medium">Research</a>
+                    <a href="#honors" class="text-slate-400 hover:text-white font-medium">Honors</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="relative z-10">
+        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-20">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div class="order-2 lg:order-1">
                         <h1 class="text-6xl lg:text-7xl font-bold font-display mb-6 leading-none">
-                            <span class="block text-white mb-2">Hey, I'm</span>
-                            <span class="block text-white mb-2">Ashmith.</span>
+                            <span class="block text-white mb-2">Innovate.</span>
+                            <span class="block text-white mb-2">Build.</span>
+                            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Scale.</span>
                         </h1>
+                        <p class="text-xl lg:text-2xl mb-8 leading-relaxed text-slate-400">
+                            Bridging <span class="text-indigo-400 font-semibold">Systems Engineering</span>, 
+                            <span class="text-cyan-400 font-semibold">Product Strategy</span>, and 
+                            <span class="text-purple-400 font-semibold">Entrepreneurship</span> to solve complex problems with scalable solutions.
+                        </p>
                         <div class="flex flex-wrap gap-4 mb-10">
                             <a href="#projects" class="magnetic-btn">
                                 <span>View Portfolio</span>
@@ -311,6 +323,7 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="py-20 px-6 lg:px-8 section-padding">
             <div class="max-w-5xl mx-auto text-center">
                 <h2 class="text-4xl lg:text-5xl font-bold font-display mb-8 text-white">About Me</h2>
@@ -320,6 +333,7 @@
             </div>
         </section>
 
+        <!-- Showcase Video -->
         <section id="showcase" class="py-20 px-6 lg:px-8 bg-slate-900/30">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
@@ -332,10 +346,12 @@
             </div>
         </section>
 
+        <!-- Initiatives -->
         <section id="initiatives" class="py-32 px-6 lg:px-8 section-padding">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-16 text-white">Strategic Initiatives</h2>
                 <div class="grid grid-cols-1 gap-12">
+                    <!-- DECA -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_1123-YKb8K40BW9SPMRG3.JPG" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="DECA">
                         <div class="md:w-2/3">
@@ -349,6 +365,7 @@
                         </div>
                     </div>
                     
+                    <!-- Mini Makers -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row-reverse gap-8 items-center">
                         <img src="https://assets.zyrosite.com/m7VwlDNaLnflRR91/dsc_0081-m7VDe2vrp6u5kGzz.jpg" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="Mini Makers">
                         <div class="md:w-2/3">
@@ -362,6 +379,7 @@
                         </div>
                     </div>
 
+                    <!-- Cognicade -->
                     <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center">
                         <img src="https://assets.zyrosite.com/mxB4b12qB9HLznRd/img_4127-YD0lonqPnvFxjg5K.jpeg" class="w-full md:w-1/3 rounded-xl shadow-lg h-64 object-cover" alt="Cognicade">
                         <div class="md:w-2/3">
@@ -378,6 +396,7 @@
             </div>
         </section>
 
+        <!-- Projects Section (Dynamic) -->
         <section id="projects" class="py-32 px-6 lg:px-8 bg-slate-900/30 section-padding">
             <div class="max-w-7xl mx-auto">
                 <div class="mb-16">
@@ -385,20 +404,49 @@
                     <p class="text-xl text-slate-400">Scalable software solutions solving specific business and user problems.</p>
                 </div>
                 <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    </div>
+                    <!-- Projects injected via JS -->
+                </div>
             </div>
         </section>
 
-        <section class="py-16 px-6 lg:px-8">
+        <!-- Honors & Recognition (Replaces old Awards Section) -->
+        <section id="honors" class="py-20 px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl lg:text-5xl font-bold font-display mb-6 text-white">Honors & Recognition</h2>
+                </div>
+
+                <!-- Featured Award -->
+                <div class="glass-card spotlight-card rounded-2xl p-10 mb-12 border border-indigo-500/30 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="ph-fill ph-trophy text-9xl text-indigo-400"></i>
+                    </div>
+                    <div class="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 shrink-0">
+                            <span class="text-3xl font-bold text-white">#1</span>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-white mb-2">Top 100 Emerging Innovator of 2026</h3>
+                            <p class="text-indigo-400 font-semibold mb-3">Limitless World Summit • Global Distinction</p>
+                            <p class="text-slate-300 text-lg leading-relaxed max-w-2xl">
+                                Selected from a global pool of applicants representing 29 countries and 25 U.S. states. 
+                                Recognized for innovation impact and invited to the Semifinal Round for the Emerging Innovator of the Year title.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards Ticker -->
                 <div class="awards-ticker">
                     <div class="ticker-content">
+                        <!-- Content duplicated for seamless scroll -->
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA ICDC Award of Excellence (2x)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> AcademiesHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> PhoenixHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> CTE Department Award</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> Sudeekshan Service Recognition</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA Top 5 State Finalist</span>
+                        <!-- Duplicate -->
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> DECA ICDC Award of Excellence (2x)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> AcademiesHacks Winner (1st Place)</span>
                         <span class="ticker-item"><i class="ph-fill ph-trophy text-indigo-400"></i> PhoenixHacks Winner (1st Place)</span>
@@ -407,6 +455,7 @@
             </div>
         </section>
 
+        <!-- Experience -->
         <section id="experience" class="py-32 px-6 lg:px-8 section-padding">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-16 text-white">Experience</h2>
@@ -452,6 +501,7 @@
             </div>
         </section>
 
+        <!-- Research -->
         <section id="research" class="py-32 px-6 lg:px-8 bg-slate-900/30 section-padding">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-5xl font-bold font-display mb-12 text-white">Research</h2>
@@ -480,6 +530,7 @@
         </footer>
     </main>
 
+    <!-- Project Data Script -->
     <script>
         // ==========================================
         //  PROJECT CONFIGURATION
@@ -645,7 +696,7 @@
         });
 
         // ==========================================
-        //  3D & ANIMATION INIT
+        //  3D & ANIMATION INIT (Simplified)
         // ==========================================
         
         window.addEventListener('load', () => {
@@ -677,6 +728,18 @@
         gsap.utils.toArray('.glass-card').forEach(card => {
             gsap.from(card, {
                 y: 50, opacity: 0, duration: 0.8, scrollTrigger: { trigger: card, start: "top 90%" }
+            });
+        });
+
+        // Add spotlight effect to new cards
+        const spotlightCards = document.querySelectorAll('.spotlight-card');
+        spotlightCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
             });
         });
 
